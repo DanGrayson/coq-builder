@@ -2,3 +2,5 @@ bin
 lib
 share
 man
+*.tar.gz
+.made-*
