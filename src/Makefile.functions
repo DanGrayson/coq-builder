@@ -1,14 +1,38 @@
+topdir := $(shell cd .. && /bin/pwd)
+untar = cd $1 && tar xzf $(shell basename $(value $1_url))
+install_dir = $(topdir)/encap/$1-$(value $1_version)
+configure = cd $1/$(value $1_dir) && ./configure --prefix=$(call install_dir,$1) $2
+make = cd $1/$(value $1_dir) && make -w $2
+
 define package
 $1/.made-fetch:
 	cd $1 && wget $(value $1_url)
 	touch $$@
-$1/.made-configure: $1/.made-fetch
+unfetch-$1:; rm -f $1/.made-fetch $1/$(value $1_dir)
+refetch-$1: unfetch-$1 $1/.made-fetch
+$1/.made-unpack: $1/.made-fetch
+	$(value $1_unpack)
 	touch $$@
+$1/.made-configure: $1/.made-unpack
+	$(value $1_configure)
+	touch $$@
+unconfigure-$1:; rm -f $1/.made-configure
+reconfigure-$1: unconfigure-$1 $1/.made-configure
 $1/.made-build: $1/.made-configure
+	$(value $1_build)
 	touch $$@
+unbuild-$1:; rm -f $1/.made-build
+rebuild-$1: unbuild-$1 $1/.made-build
 $1/.made-install: $1/.made-build
+	$(value $1_install)
 	touch $$@
+uninstall-$1:; rm -f $1/.made-install
+reinstall-$1: uninstall-$1 $1/.made-install
 build-$1: $1/.made-install
 clean::
-	rm -f $1/.made-* $1/$(shell basename $(value $1_url))
+#	rm -rf $1/.made-fetch $1/$(shell basename $(value $1_url))
+	rm -rf $1/.made-unpack $1/$1-$(value $1_version)
+	rm -rf $1/.made-configure
+	rm -rf $1/.made-build
+	rm -rf $1/.made-install
 endef

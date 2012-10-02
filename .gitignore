@@ -4,3 +4,7 @@ share
 man
 *.tar.gz
 .made-*
+doc
+encap
+etc
+include

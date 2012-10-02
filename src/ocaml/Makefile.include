@@ -1,0 +1,9 @@
+ocaml_version := 2.3.9
+ocaml_url     := ftp://ftp.encap.org/pub/encap/ocaml/ocaml-$(ocaml_version).tar.gz
+ocaml_build   := echo hi there
+
+$(eval $(call package,ocaml))
+
+# Local Variables:
+# compile-command: "make -C .. build-ocaml"
+# End:

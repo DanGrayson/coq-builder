@@ -1,6 +1,10 @@
-epkg_version := 2.3.9
-epkg_url     := ftp://ftp.encap.org/pub/encap/epkg/epkg-$(epkg_version).tar.gz
-epkg_build   := echo hi there
+epkg_version         := 2.3.9
+epkg_url             := ftp://ftp.encap.org/pub/encap/epkg/epkg-$(epkg_version).tar.gz
+epkg_dir             := epkg-$(epkg_version)
+epkg_unpack          = $(call untar,epkg)
+epkg_configure       = $(call configure,epkg,--with-encap-source=$(topdir)/encap --with-encap-target=$(topdir))
+epkg_build           = $(call make,epkg,all)
+epkg_install         = $(call make,epkg,install)
 
 $(eval $(call package,epkg))
 
