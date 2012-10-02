@@ -1,10 +1,9 @@
-bin
-lib
-share
-man
-*.tar.gz
-.made-*
 doc
 encap
 etc
 include
+bin
+lib
+share
+man
+src/*/build

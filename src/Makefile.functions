@@ -1,38 +1,38 @@
 topdir := $(shell cd .. && /bin/pwd)
-untar = cd $1 && tar xzf $(shell basename $(value $1_url))
+wget = cd $1/build && wget $2
+untar = cd $1/build && tar xzf $2
 install_dir = $(topdir)/encap/$1-$(value $1_version)
-configure = cd $1/$(value $1_dir) && ./configure --prefix=$(call install_dir,$1) $2
-make = cd $1/$(value $1_dir) && make -w $2
+configure = cd $1/build/$(value $1_dir) && ./configure --prefix=$(call install_dir,$1) $2
+make = cd $1/build/$(value $1_dir) && make -w $2
 
 define package
-$1/.made-fetch:
-	cd $1 && wget $(value $1_url)
+$1/build/.made-fetch:
+	mkdir -p $1/build
+	$(value $1_fetch)
 	touch $$@
-unfetch-$1:; rm -f $1/.made-fetch $1/$(value $1_dir)
-refetch-$1: unfetch-$1 $1/.made-fetch
-$1/.made-unpack: $1/.made-fetch
+unfetch-$1:; rm -f $1/build/.made-fetch $1/build/$(value $1_dir)
+refetch-$1: unfetch-$1 $1/build/.made-fetch
+$1/build/.made-unpack: $1/build/.made-fetch
 	$(value $1_unpack)
 	touch $$@
-$1/.made-configure: $1/.made-unpack
+$1/build/.made-configure: $1/build/.made-unpack
 	$(value $1_configure)
 	touch $$@
-unconfigure-$1:; rm -f $1/.made-configure
-reconfigure-$1: unconfigure-$1 $1/.made-configure
-$1/.made-build: $1/.made-configure
+unconfigure-$1:; rm -f $1/build/.made-configure
+reconfigure-$1: unconfigure-$1 $1/build/.made-configure
+$1/build/.made-build: $1/build/.made-configure
 	$(value $1_build)
 	touch $$@
-unbuild-$1:; rm -f $1/.made-build
-rebuild-$1: unbuild-$1 $1/.made-build
-$1/.made-install: $1/.made-build
+unbuild-$1:; rm -f $1/build/.made-build
+rebuild-$1: unbuild-$1 $1/build/.made-build
+$1/build/.made-install: $1/build/.made-build
+	epkg/build/epkg-$(epkg_version)/epkg/epkg -r $1
+	rm -rf $(call install_dir,$1)
 	$(value $1_install)
 	touch $$@
-uninstall-$1:; rm -f $1/.made-install
-reinstall-$1: uninstall-$1 $1/.made-install
-build-$1: $1/.made-install
+uninstall-$1:; rm -f $1/build/.made-install
+reinstall-$1: uninstall-$1 $1/build/.made-install
+build-$1: $1/build/.made-install
 clean::
-#	rm -rf $1/.made-fetch $1/$(shell basename $(value $1_url))
-	rm -rf $1/.made-unpack $1/$1-$(value $1_version)
-	rm -rf $1/.made-configure
-	rm -rf $1/.made-build
-	rm -rf $1/.made-install
+	rm -rf $1/build
 endef
