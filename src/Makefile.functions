@@ -33,6 +33,6 @@ $1/build/.made-install: $1/build/.made-build
 uninstall-$1:; rm -f $1/build/.made-install
 reinstall-$1: uninstall-$1 $1/build/.made-install
 build-$1: $1/build/.made-install
-clean::
-	rm -rf $1/build
+clean: clean-$1
+clean-$1:; rm -rf $1/build
 endef
