@@ -1,0 +1,9 @@
+epkg_version := 2.3.9
+epkg_url     := ftp://ftp.encap.org/pub/encap/epkg/epkg-$(epkg_version).tar.gz
+epkg_build   := echo hi there
+
+$(eval $(call package,epkg))
+
+# Local Variables:
+# compile-command: "make -C .. build-epkg"
+# End:

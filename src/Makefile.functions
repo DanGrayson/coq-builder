@@ -1,0 +1,14 @@
+define package
+$1/.made-fetch:
+	cd $1 && wget $(value $1_url)
+	touch $$@
+$1/.made-configure: $1/.made-fetch
+	touch $$@
+$1/.made-build: $1/.made-configure
+	touch $$@
+$1/.made-install: $1/.made-build
+	touch $$@
+build-$1: $1/.made-install
+clean::
+	rm -f $1/.made-* $1/$(shell basename $(value $1_url))
+endef
