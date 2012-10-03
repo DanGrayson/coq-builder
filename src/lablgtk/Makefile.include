@@ -10,5 +10,5 @@ $(call requires,lablgtk,ocaml)
 $(eval $(call package,lablgtk))
 
 # Local Variables:
-# compile-command: "make -C .. build-lablgtk"
+# compile-command: "make -C .. linkup-lablgtk"
 # End:

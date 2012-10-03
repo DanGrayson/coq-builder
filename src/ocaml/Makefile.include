@@ -2,12 +2,12 @@ ocaml_version         = 4.00.0
 ocaml_dir            := ocaml-$(ocaml_version)
 ocaml_fetch           = $(call wget,ocaml,http://caml.inria.fr/pub/distrib/ocaml-4.00/ocaml-$(ocaml_version).tar.bz2)
 ocaml_extract         = $(call untar-j,ocaml,ocaml-$(ocaml_version).tar.bz2)
-ocaml_configure       = cd ocaml/build/$(ocaml_dir) && ./configure -prefix $(topdir)
+ocaml_configure       = cd $(call build_dir,ocaml) && ./configure -prefix $(topdir)
 ocaml_build           = $(call make,ocaml,world opt opt.opt)
 ocaml_install         = $(call make,ocaml,install PREFIX=$(topdir)/encap/$(ocaml_dir))
 
 $(eval $(call package,ocaml))
 
 # Local Variables:
-# compile-command: "make -C .. build-ocaml"
+# compile-command: "make -C .. linkup-ocaml"
 # End:

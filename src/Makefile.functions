@@ -1,11 +1,12 @@
 topdir := $(shell cd .. && /bin/pwd)
-build_dir = $1/build/$(value $1_dir)
-wget = cd $1/build && rm -f $(shell basename $2) && wget $2
-svn-checkout = cd $1/build && svn co $2 $3
+files_dir = $1/files-$(value $1_version)
+build_dir = $(call files_dir,$1)/$(value $1_dir)
+wget = cd $(call files_dir,$1) && rm -f $(shell basename $2) && wget $2
+svn-checkout = cd $(call files_dir,$1) && svn co $2 $3
 svn-update = cd $(call build_dir,$1) && svn co $2 $3
-# git-clone = cd $1/build && git clone --no-checkout $2
-untar-z = cd $1/build && tar xzf $2
-untar-j = cd $1/build && tar xjf $2
+# git-clone = cd $(call files_dir,$1) && git clone --no-checkout $2
+untar-z = cd $(call files_dir,$1) && tar xzf $2
+untar-j = cd $(call files_dir,$1) && tar xjf $2
 install_dir = $(topdir)/encap/$1-$(value $1_version)
 configure = cd $(call build_dir,$1) && ./configure --prefix=$(call install_dir,$1) $2
 make = cd $(call build_dir,$1) && make -w -j1 $2
@@ -13,51 +14,52 @@ make = cd $(call build_dir,$1) && make -w -j1 $2
 export PATH := $(topdir)/bin:$(PATH)
 
 define requires
-$(foreach x,$2,$(eval $1/build/.made-configure: $x/build/.made-linkup))
+$(foreach x,$2,$(eval $(call files_dir,$1)/.made-configure: $(call files_dir,$x)/.made-linkup))
 endef
 
 epkg = $(call build_dir,epkg)/epkg/epkg
 
 define package
-$1/build/.made-fetch:
-	mkdir -p $1/build
+$(call files_dir,$1)/.made-fetch:
+	mkdir -p $(call files_dir,$1)
 	$(value $1_fetch)
 	touch $$@
-fetch-$1: $1/build/.made-fetch
-unfetch-$1:; rm -f $1/build/.made-fetch $(call build_dir,$1)
-refetch-$1: unfetch-$1 $1/build/.made-fetch
-$1/build/.made-extract: $1/build/.made-fetch
+fetch-$1: $(call files_dir,$1)/.made-fetch
+unfetch-$1:; rm -f $(call files_dir,$1)/.made-fetch $(call build_dir,$1)
+refetch-$1: unfetch-$1 $(call files_dir,$1)/.made-fetch
+$(call files_dir,$1)/.made-extract: $(call files_dir,$1)/.made-fetch
 	$(value $1_extract)
 	touch $$@
-extract-$1: $1/build/.made-extract
-$1/build/.made-configure: $1/build/.made-extract
+extract-$1: $(call files_dir,$1)/.made-extract
+$(call files_dir,$1)/.made-configure: $(call files_dir,$1)/.made-extract
 	$(value $1_configure)
 	touch $$@
-unconfigure-$1:; rm -f $1/build/.made-configure
-reconfigure-$1: unconfigure-$1 $1/build/.made-configure
-$1/build/.made-build: $1/build/.made-configure
+unconfigure-$1:; rm -f $(call files_dir,$1)/.made-configure
+reconfigure-$1: unconfigure-$1 $(call files_dir,$1)/.made-configure
+$(call files_dir,$1)/.made-build: $(call files_dir,$1)/.made-configure
 	$(value $1_build)
 	touch $$@
-unbuild-$1:; rm -f $1/build/.made-build
-rebuild-$1: unbuild-$1 $1/build/.made-build
-$1/build/.made-install: $1/build/.made-build epkg/build/.made-build
+unbuild-$1:; rm -f $(call files_dir,$1)/.made-build
+rebuild-$1: unbuild-$1 $(call files_dir,$1)/.made-build
+$(call files_dir,$1)/.made-install: $(call files_dir,$1)/.made-build $(call files_dir,epkg)/.made-build
 	-$(epkg) -r $1
 	rm -rf $(call install_dir,$1)
 	$(value $1_install)
 	touch $$@
-uninstall-$1:; rm -f $1/build/.made-install
-reinstall-$1: uninstall-$1 $1/build/.made-install
-$1/build/.made-linkup: $1/build/.made-install epkg/build/.made-build
+install-$1: $(call files_dir,$1)/.made-install
+uninstall-$1:; rm -f $(call files_dir,$1)/.made-install
+reinstall-$1: uninstall-$1 $(call files_dir,$1)/.made-install
+$(call files_dir,$1)/.made-linkup: $(call files_dir,$1)/.made-install $(call files_dir,epkg)/.made-build
 	$(epkg) $1-$(value $1_version)
 	touch $$@
+relinkup-$1: unlinkup-$1 $(call files_dir,$1)/.made-linkup
 unlinkup-all: unlinkup-$1
-unlinkup-$1: epkg/build/.made-build
+unlinkup-$1: $(call files_dir,epkg)/.made-build
 	-$(epkg) -r $1-$(value $1_version)
-	rm -f $1/build/.made-linkup
-relinkup-$1: unlinkup-$1 $1/build/.made-linkup
-build-$1: $1/build/.made-linkup
+	rm -f $(call files_dir,$1)/.made-linkup
+linkup-$1: $(call files_dir,$1)/.made-linkup
 clean: clean-$1
-clean-$1:; rm -rf $1/build
+clean-$1:; rm -rf $(call files_dir,$1)
 endef
 
 include epkg/Makefile.include

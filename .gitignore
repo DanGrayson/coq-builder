@@ -5,6 +5,6 @@ include
 lib
 share
 man
-src/*/build
+src/*/files-*
 bin/*
 sbin

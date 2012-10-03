@@ -9,5 +9,5 @@ epkg_install         = $(call make,epkg,install)
 $(eval $(call package,epkg))
 
 # Local Variables:
-# compile-command: "make -C .. build-epkg"
+# compile-command: "make -C .. linkup-epkg"
 # End:

@@ -1,6 +1,6 @@
-all : build-coq
+all : linkup-coq
 include Makefile.functions
-include coq/Makefile.include
+include ocaml/Makefile.include
 include lablgtk/Makefile.include
 include hevea/Makefile.include
-include ocaml/Makefile.include
+include coq/Makefile.include

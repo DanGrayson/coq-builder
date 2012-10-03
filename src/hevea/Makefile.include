@@ -8,5 +8,5 @@ hevea_install         = $(call make,hevea,install PREFIX=$(call install_dir,heve
 $(call requires,hevea,ocaml)
 $(eval $(call package,hevea))
 # Local Variables:
-# compile-command: "make -C .. build-hevea"
+# compile-command: "make -C .. linkup-hevea"
 # End:
