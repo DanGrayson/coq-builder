@@ -1,7 +1,5 @@
 This is a system of makefiles to build coq and the programs it needs.
 
-(Not relocatable yet, but it works at IAS.)
-
 Quick start:
 
       make -C src

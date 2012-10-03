@@ -1,0 +1,11 @@
+with_version = 1
+with_install =	mkdir -p $(call install_dir,with)/bin && \
+		sed -e 's\#@TOPDIR@\#$(topdir)\#g' \
+			<with/with.sh \
+			>$(call install_dir,with)/bin/with && \
+		chmod a+x $(call install_dir,with)/bin/with
+$(call requires,with)
+$(eval $(call package,with))
+# Local Variables:
+# compile-command: "make -C .. linkup-with"
+# End:

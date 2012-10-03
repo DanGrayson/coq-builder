@@ -1,6 +1,6 @@
 all : linkup-coq
 include Makefile.functions
-include ocaml/Makefile.include
-include lablgtk/Makefile.include
-include hevea/Makefile.include
-include coq/Makefile.include
+# in the following list, prerequisites appear to the left
+PACKAGES = with ocaml lablgtk hevea coq
+$(foreach i, $(PACKAGES), $(eval include $i/Makefile.include))
+

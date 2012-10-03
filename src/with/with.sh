@@ -1,6 +1,6 @@
 #! /bin/sh
 
-TOP=~univalence/usr
+TOP=@TOPDIR@
 
 if [ $# = 0 ]
 then exec 1>&2
