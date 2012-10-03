@@ -1,10 +1,9 @@
 coq_version           = 8.4
 coq_dir              := coq-$(coq_version)
-# coq_tarfile         = coq-$(coq_version).tar.gz
-# coq_fetch           = $(call wget,coq,http://coq.inria.fr/distri/$(coq_tarfile))
-# coq_extract         = $(call untar-z,coq,$(coq_tarfile))
-# coq_build           = $(call make,coq,PREFIX=$(call install_dir,coq))
-coq_install         = false
+coq_extract           = $(call svn-checkout,coq,svn://scm.gforge.inria.fr/svn/coq/branches/v8.4,$(coq_dir))
+coq_configure         = cd $(call build_dir,coq) && ./configure -opt -annotate -debug -prefix $(call install_dir,coq)
+coq_build             = $(call make,coq,KEEP_ML4_PREPROCESSED=true VERBOSE=true READABLE_ML4=yes world)
+coq_install           = $(call make,coq,install)
 $(call requires,coq,lablgtk ocaml)
 $(eval $(call package,coq))
 # Local Variables:

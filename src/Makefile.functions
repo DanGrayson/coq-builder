@@ -1,9 +1,12 @@
 topdir := $(shell cd .. && /bin/pwd)
+build_dir = $1/build/$(value $1_dir)
 wget = cd $1/build && rm -f $(shell basename $2) && wget $2
+svn-checkout = cd $1/build && svn co $2 $3
+svn-update = cd $(call build_dir,$1) && svn co $2 $3
+# git-clone = cd $1/build && git clone --no-checkout $2
 untar-z = cd $1/build && tar xzf $2
 untar-j = cd $1/build && tar xjf $2
 install_dir = $(topdir)/encap/$1-$(value $1_version)
-build_dir = $1/build/$(value $1_dir)
 configure = cd $(call build_dir,$1) && ./configure --prefix=$(call install_dir,$1) $2
 make = cd $1/build/$(value $1_dir) && make -w -j1 $2
 
