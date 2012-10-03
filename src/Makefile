@@ -1,4 +1,4 @@
-all : build-epkg
+all : build-ocaml
 include Makefile.functions
 include coq/Makefile.include
 include epkg/Makefile.include

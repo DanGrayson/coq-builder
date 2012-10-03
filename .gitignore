@@ -2,8 +2,9 @@ doc
 encap
 etc
 include
-bin
 lib
 share
 man
 src/*/build
+bin/*
+sbin
