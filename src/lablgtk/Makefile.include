@@ -1,0 +1,14 @@
+lablgtk_version         = 2.16.0
+lablgtk_dir            := lablgtk-$(lablgtk_version)
+lablgtk_tarfile         = lablgtk-$(lablgtk_version).tar.gz
+lablgtk_fetch           = $(call wget,lablgtk,http://forge.ocamlcore.org/frs/download.php/979/$(lablgtk_tarfile))
+lablgtk_extract         = $(call untar-z,lablgtk,$(lablgtk_tarfile))
+lablgtk_configure       = $(call configure,lablgtk_configure,--with-libdir=$(call install_dir,lablgtk)/lib/ocaml)
+lablgtk_build           = $(call make,lablgtk,world)
+lablgtk_install         = $(call make,lablgtk,old-install)
+$(call requires,lablgtk,ocaml)
+$(eval $(call package,lablgtk))
+
+# Local Variables:
+# compile-command: "make -C .. build-lablgtk"
+# End:

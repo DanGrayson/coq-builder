@@ -1,0 +1,12 @@
+# coq_version         = 2.00
+# coq_dir            := coq-$(coq_version)
+# coq_tarfile         = coq-$(coq_version).tar.gz
+# coq_fetch           = $(call wget,coq,http://coq.inria.fr/distri/$(coq_tarfile))
+# coq_extract         = $(call untar-z,coq,$(coq_tarfile))
+# coq_build           = $(call make,coq,PREFIX=$(call install_dir,coq))
+# coq_install         = $(call make,coq,install PREFIX=$(call install_dir,coq))
+$(call requires,coq,coq lablgtk ocaml)
+$(eval $(call package,coq))
+# Local Variables:
+# compile-command: "make -C .. build-coq"
+# End:
