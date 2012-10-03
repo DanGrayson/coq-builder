@@ -1,7 +1,10 @@
 This is a system of makefiles to build coq and the programs it needs.
 
-Quick start:
+Quick start for software builders, do once for the users:
 
       make -C src
+
+Quick start for software users:
+
       bin/with + bash
       coqide
