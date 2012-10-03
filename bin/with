@@ -1,9 +1,28 @@
 #! /bin/sh
 
-ENCAP=~univalence/usr/encap
+TOP=~univalence/usr
+
+if [ $# = 0 ]
+then exec 1>&2
+     cmd=$(basename $0)
+     echo "usage:"
+     echo "   $cmd + command               (run command in the environment provided by $TOP)"
+     echo "   $cmd package command         (run command in the environment provided by package)"
+     echo "   $cmd \"package ...\" command   (run command in the environment provided by packages)"
+     echo " packages available:"
+     for i in $TOP/encap/*-*
+     do if [ -d "$i" ]
+	then echo "    $(basename $i)"
+	fi
+     done
+     exit 0
+fi
 
 for j in $1
-do i="$ENCAP/$j"
+do if [ "$j" = + ]
+   then i=$TOP
+   else i="$TOP/encap/$j"
+   fi
    if ! [ -d "$i" ]
    then echo "expected a directory: $i" >&2
         exit 1
