@@ -10,8 +10,10 @@ make = cd $1/build/$(value $1_dir) && make -w -j1 $2
 export PATH := $(topdir)/bin:$(PATH)
 
 define requires
-$(foreach x, $2,$(eval $1/build/.made-configure: build-$x))
+$(foreach x,$2,$(eval $1/build/.made-configure: $x/build/.made-linkup))
 endef
+
+epkg = $(call build_dir,epkg)/epkg/epkg
 
 define package
 $1/build/.made-fetch:
@@ -36,21 +38,23 @@ $1/build/.made-build: $1/build/.made-configure
 unbuild-$1:; rm -f $1/build/.made-build
 rebuild-$1: unbuild-$1 $1/build/.made-build
 $1/build/.made-install: $1/build/.made-build epkg/build/.made-build
-	-$(call build_dir,epkg)/epkg/epkg -r $1
+	-$(epkg) -r $1
 	rm -rf $(call install_dir,$1)
 	$(value $1_install)
 	touch $$@
 uninstall-$1:; rm -f $1/build/.made-install
 reinstall-$1: uninstall-$1 $1/build/.made-install
 $1/build/.made-linkup: $1/build/.made-install epkg/build/.made-build
-	$(call build_dir,$1)/epkg/epkg $1-$(value $1_version)
+	$(epkg) $1-$(value $1_version)
 	touch $$@
 unlinkup-all: unlinkup-$1
 unlinkup-$1: epkg/build/.made-build
-	-$(call build_dir,$1)/epkg/epkg -r $1-$(value $1_version)
+	-$(epkg) -r $1-$(value $1_version)
 	rm -f $1/build/.made-linkup
 relinkup-$1: unlinkup-$1 $1/build/.made-linkup
 build-$1: $1/build/.made-linkup
 clean: clean-$1
 clean-$1:; rm -rf $1/build
 endef
+
+include epkg/Makefile.include
