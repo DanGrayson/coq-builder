@@ -8,7 +8,7 @@ untar-z = cd $1/build && tar xzf $2
 untar-j = cd $1/build && tar xjf $2
 install_dir = $(topdir)/encap/$1-$(value $1_version)
 configure = cd $(call build_dir,$1) && ./configure --prefix=$(call install_dir,$1) $2
-make = cd $1/build/$(value $1_dir) && make -w -j1 $2
+make = cd $(call build_dir,$1) && make -w -j1 $2
 
 export PATH := $(topdir)/bin:$(PATH)
 
