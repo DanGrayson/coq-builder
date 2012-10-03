@@ -8,3 +8,16 @@ Quick start for software users:
 
       bin/with + bash
       coqide
+
+Add the environment to your .profile, temporary solution:
+      
+	export PATH=--THISDIR--/bin:$PATH
+	export MANPATH=--THISDIR--/share/man:$MANPATH
+	export LD_LIBRARY_PATH=--THISDIR--/lib:$LD_LIBRARY_PATH
+
+where --THISDIR-- is replaced by the path to the directory this file is in,
+such as ~univalence/usr, in which case the commands would be
+      
+	export PATH=~univalence/usr/bin:$PATH
+	export MANPATH=~univalence/usr/share/man:$MANPATH
+	export LD_LIBRARY_PATH=~univalence/usr/lib:$LD_LIBRARY_PATH
