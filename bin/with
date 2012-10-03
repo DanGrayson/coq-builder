@@ -1,3 +1,24 @@
 #! /bin/sh
 
- 
+ENCAP=~univalence/usr/encap
+
+for j in $1
+do i="$ENCAP/$j"
+   if ! [ -d "$i" ]
+   then echo "expected a directory: $i" >&2
+        exit 1
+   fi
+   [ -d "$i"/bin ] && PATH="$i"/bin:$PATH
+   [ -d "$i"/man ] && MANPATH="$i"/man:$MANPATH
+   [ -d "$i"/share/man ] && MANPATH="$i"/share/man:$MANPATH
+   [ -d "$i"/info -a ! -h "$i"/info ] && INFOPATH="$i"/info:$INFOPATH
+   [ -d "$i"/share/info -a ! -h "$i"/share/info ] && INFOPATH="$i"/share/info:$INFOPATH
+   [ -d "$i"/lib ] && LD_LIBRARY_PATH="$i"/lib:$LD_LIBRARY_PATH
+   [ -d "$i"/lib/pkgconfig ] && PKG_CONFIG_PATH="$i"/lib/pkgconfig:$PKG_CONFIG_PATH
+done
+
+PATH="$PATH"
+export PATH MANPATH LD_LIBRARY_PATH INFOPATH PKG_CONFIG_PATH
+
+shift
+eval "$@"
