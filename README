@@ -2,14 +2,28 @@ This is a system of makefiles to build coq and the programs it needs.
 
 Quick start for software builders, do once for the users:
 
-      make -C src
+      make -C --THISDIRECTORY--/src
 
 Quick start for software users (with bash or sh as shell):
 
-      . bin/with +
+      source --THISDIRECTORY--/bin/with +
       coqide
       ... or other coq commands ...
 
+To run it from a directory other than this one, prefix the pat
+of this directory to "bin".
+
 To install the software permanently, add this to your .profile:
 
-      . bin/with +
+      source --THISDIRECTORY--/bin/with +
+
+Then "with" can be run, unprefixed by a path, as well as the coq programs.
+
+To use another version of coq, try one of these
+
+      source with coqtrunk
+      source with coq84
+
+To see what other packages are available, try
+
+      with
