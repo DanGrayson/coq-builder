@@ -4,6 +4,7 @@ with_install =	mkdir -p $(call install_dir,with)/bin && \
 			<with/with.sh \
 			>$(call install_dir,with)/bin/with && \
 		chmod a+x $(call install_dir,with)/bin/with
+$(call files_dir,with)/.made-install: with/with.sh
 $(call requires,with)
 $(eval $(call package,with))
 # Local Variables:

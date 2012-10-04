@@ -4,20 +4,12 @@ Quick start for software builders, do once for the users:
 
       make -C src
 
-Quick start for software users:
+Quick start for software users (with bash or sh as shell):
 
-      bin/with + bash
+      . bin/with +
       coqide
+      ... or other coq commands ...
 
-Add the environment to your .profile, temporary solution:
-      
-	export PATH=--THISDIR--/bin:$PATH
-	export MANPATH=--THISDIR--/share/man:$MANPATH
-	export LD_LIBRARY_PATH=--THISDIR--/lib:$LD_LIBRARY_PATH
+To install the software permanently, add this to your .profile:
 
-where --THISDIR-- is replaced by the path to the directory this file is in,
-such as ~univalence/usr, in which case the commands would be
-      
-	export PATH=~univalence/usr/bin:$PATH
-	export MANPATH=~univalence/usr/share/man:$MANPATH
-	export LD_LIBRARY_PATH=~univalence/usr/lib:$LD_LIBRARY_PATH
+      . bin/with +

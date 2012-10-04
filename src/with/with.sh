@@ -7,6 +7,7 @@ then exec 1>&2
      cmd=$(basename $0)
      echo "usage:"
      echo "   $cmd + command               (run command in the environment provided by $TOP)"
+     echo "   . $cmd +                     (modify the environment of the current bash shell)"
      echo "   $cmd package command         (run command in the environment provided by package)"
      echo "   $cmd \"package ...\" command   (run command in the environment provided by packages)"
      echo " packages available:"
@@ -41,3 +42,6 @@ export PATH MANPATH LD_LIBRARY_PATH INFOPATH PKG_CONFIG_PATH
 
 shift
 eval "$@"
+# Local Variables:
+# compile-command: "make -C .. linkup-with"
+# End:
