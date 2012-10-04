@@ -16,6 +16,7 @@ then exec 1>&2
 	then echo "    $(basename $i)"
 	fi
      done
+     return 2>/dev/null
      exit 0
 fi
 
@@ -26,6 +27,7 @@ do if [ "$j" = + ]
    fi
    if ! [ -d "$i" ]
    then echo "expected a directory: $i" >&2
+        return 1 2>/dev/null
         exit 1
    fi
    [ -d "$i"/bin ] && PATH="$i"/bin:$PATH
