@@ -1,16 +1,12 @@
-coq_version           = 8.4
-coq_dir              := coq-$(coq_version)
-coq_extract           = $(call svn-checkout,coq,svn://scm.gforge.inria.fr/svn/coq/branches/v8.4,$(coq_dir))
-coq_configure         = cd $(call build_dir,coq) && ./configure -opt -annotate -debug -prefix $(call install_dir,coq)
-coq_build             = $(call make,coq,KEEP_ML4_PREPROCESSED=true VERBOSE=true READABLE_ML4=yes world)
-coq_install           = $(call make,coq,install)
-$(call requires,coq,hevea lablgtk ocaml)
-
-$(eval $(call package,coq))
-
-# $(eval $(call package,coq,8.2))
-# $(eval $(call package,coq,8.4))
+coq84_version           = 8.4
+coq84_dir              := coq-$(coq84_version)
+coq84_extract           = $(call svn-checkout,coq84,svn://scm.gforge.inria.fr/svn/coq/branches/v8.4,$(coq84_dir))
+coq84_configure         = cd $(call build_dir,coq84) && ./configure -opt -annotate -debug -prefix $(call install_dir,coq84)
+coq84_build             = $(call make,coq84,KEEP_ML4_PREPROCESSED=true VERBOSE=true READABLE_ML4=yes world)
+coq84_install           = $(call make,coq84,install)
+$(call requires,coq84,hevea lablgtk ocaml)
+$(eval $(call package,coq84))
 
 # Local Variables:
-# compile-command: "make -C .. linkup-coq"
+# compile-command: "make -C .. linkup-coq84"
 # End:
