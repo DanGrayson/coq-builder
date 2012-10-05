@@ -4,7 +4,7 @@ coq_extract           = $(call svn-checkout,coq,svn://scm.gforge.inria.fr/svn/co
 coq_configure         = cd $(call build_dir,coq) && ./configure -opt -annotate -debug -prefix $(call install_dir,coq)
 coq_build             = $(call make,coq,KEEP_ML4_PREPROCESSED=true VERBOSE=true READABLE_ML4=yes world)
 coq_install           = $(call make,coq,install)
-$(call requires,coq,lablgtk ocaml)
+$(call requires,coq,hevea lablgtk ocaml)
 
 $(eval $(call package,coq))
 
