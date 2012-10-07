@@ -4,7 +4,7 @@ Quick start for software users (with bash or sh as shell):
       coqide
       ... or other coq commands ...
 
-To run it from a directory other than this one, prefix the pat
+To run it from a directory other than this one, prefix the path
 of this directory to "bin".
 
 To install the software permanently, add this to your .profile:
