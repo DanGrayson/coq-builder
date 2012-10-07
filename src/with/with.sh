@@ -4,7 +4,7 @@ TOP=@TOPDIR@
 
 if [ $# = 0 ]
 then exec 1>&2
-     cmd=$(basename $0)
+     cmd=with
      echo "usage:"
      echo "   $cmd + command               (run command in the environment provided by $TOP)"
      echo "   . $cmd +                     (modify the environment of the current bash shell)"
@@ -16,7 +16,8 @@ then exec 1>&2
 	then echo "    $(basename $i)"
 	fi
      done
-     exit 0
+     return
+     exit
 fi
 
 for j in $1
@@ -26,6 +27,7 @@ do if [ "$j" = + ]
    fi
    if ! [ -d "$i" ]
    then echo "expected a directory: $i" >&2
+        return 1
         exit 1
    fi
    [ -d "$i"/bin ] && PATH="$i"/bin:$PATH
