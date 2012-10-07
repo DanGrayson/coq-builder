@@ -1,7 +1,7 @@
 coq_version           = 8.4
 coq_dir              := coq-$(coq_version)
 coq_extract           = $(call svn-checkout,coq,svn://scm.gforge.inria.fr/svn/coq/branches/v8.4,$(coq_dir))
-coq_configure         = cd $(call build_dir,coq) && ./configure -opt -annotate -debug -prefix $(call install_dir,coq)
+coq_configure         = cd $(call build_dir,coq) && ./configure -opt -annotate -debug -prefix $(call install_dir,coq) -with-doc no
 coq_build             = $(call make,coq,KEEP_ML4_PREPROCESSED=true VERBOSE=true READABLE_ML4=yes world)
 coq_install           = $(call make,coq,install)
 $(call requires,coq,hevea lablgtk ocaml)
