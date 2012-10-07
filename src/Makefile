@@ -1,4 +1,4 @@
-all : linkup-coq ../README.user linkup-ProofGeneral
+all : linkup-coq ../README.user linkup-ProofGeneral linkup-with
 include Makefile.functions
 # in the following list, prerequisites appear to the left
 PACKAGES = with ocaml lablgtk hevea coq ProofGeneral
