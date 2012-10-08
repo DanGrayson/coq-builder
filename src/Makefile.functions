@@ -59,7 +59,7 @@ unlinkup-$1: $(call files_dir,epkg)/.made-build
 	rm -f $(call files_dir,$1)/.made-linkup
 linkup-$1: $(call files_dir,$1)/.made-linkup
 clean: clean-$1
-clean-$1:; rm -rf $(call files_dir,$1)
+clean-$1:; rm -rf $(call files_dir,$1)/.made-* $(call files_dir,$1)
 endef
 
 include epkg/Makefile.include

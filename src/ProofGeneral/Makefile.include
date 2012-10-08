@@ -1,0 +1,14 @@
+ProofGeneral_version         = 4.2pre120914
+ProofGeneral_dir            := ProofGeneral-$(ProofGeneral_version)
+ProofGeneral_fetch           = $(call wget,ProofGeneral,http://ProofGeneral.inf.ed.ac.uk/releases/ProofGeneral-$(ProofGeneral_version).tgz)
+ProofGeneral_extract         = $(call untar-z,ProofGeneral,ProofGeneral-$(ProofGeneral_version).tgz)
+ProofGeneral_prefixes        = DEST_PREFIX=$(topdir) \
+			            PREFIX=$(topdir)/encap/$(ProofGeneral_dir)
+ProofGeneral_build           = $(call make,ProofGeneral,EMACS=/usr/bin/emacs $(ProofGeneral_prefixes))
+ProofGeneral_install         = $(call make,ProofGeneral,install $(ProofGeneral_prefixes))
+
+$(eval $(call package,ProofGeneral))
+
+# Local Variables:
+# compile-command: "make -C .. linkup-ProofGeneral"
+# End:

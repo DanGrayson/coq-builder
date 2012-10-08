@@ -1,0 +1,6 @@
+This is a system of makefiles to build coq and the programs it needs.
+
+Quick start for software builders, do once for the users, after putting
+this directory tree in the final location:
+
+      make
