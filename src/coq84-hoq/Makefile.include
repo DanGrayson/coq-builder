@@ -1,0 +1,12 @@
+coq84hoq_version           = 8.4-hoq
+coq84hoq_dir              := coq-$(coq84hoq_version)
+coq84hoq_extract           = $(call git,clone,git://github.com/HoTT/coq.git,$(coq84hoq_dir))
+coq84hoq_configure         = cd $(call build_dir,coq84hoq) && ./configure -opt -annotate -debug -prefix $(call install_dir,coq84hoq)
+coq84hoq_build             = $(call make,coq84hoq,KEEP_ML4_PREPROCESSED=true VERBOSE=true READABLE_ML4=yes world)
+coq84hoq_install           = $(call make,coq84hoq,install)
+$(call requires,coq84hoq,hevea lablgtk ocaml)
+$(eval $(call package,coq84hoq))
+
+# Local Variables:
+# compile-command: "make -C .. linkup-coq84hoq"
+# End:
