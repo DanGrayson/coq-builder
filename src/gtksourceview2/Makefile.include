@@ -1,0 +1,13 @@
+gtksourceview2_version         = 2.10.5
+gtksourceview2_dir            := gtksourceview-$(gtksourceview2_version)
+gtksourceview2_tarfile         = gtksourceview-$(gtksourceview2_version).tar.gz
+gtksourceview2_fetch           = $(call wget,gtksourceview2,http://ftp.acc.umu.se/pub/gnome/sources/gtksourceview/2.10/$(gtksourceview2_tarfile))
+gtksourceview2_extract         = $(call untar-z,gtksourceview2,$(gtksourceview2_tarfile))
+gtksourceview2_configure       = $(call configure,gtksourceview2,--prefix=$(call install_dir,gtksourceview2))
+gtksourceview2_build           = $(call make,gtksourceview2,all)
+gtksourceview2_install         = $(call make,gtksourceview2,install)
+$(eval $(call package,gtksourceview2))
+
+# Local Variables:
+# compile-command: "make -C .. linkup-gtksourceview2"
+# End:
