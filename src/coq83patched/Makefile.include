@@ -5,7 +5,7 @@ coq83patched_fetch             = $(call git-fetch  ,coq83patched,git@github.com:
 coq83patched_extract           = $(call git-checkout,coq83patched,8.3+recommended-patches)
 coq83patched_configure         = cd $(call build_dir,coq83patched) && ./configure --prefix $(topdir) -with-doc no
 coq83patched_build             = $(call make,coq83patched,world)
-coq83patched_install           = $(call make,coq83patched,install COQINSTALLPREFIX=$(call install_dir,coq83patched,$(coq83patched_version))
+coq83patched_install           = $(call make,coq83patched,install COQINSTALLPREFIX=$(call install_dir,coq83patched,$(coq83patched_version)))
 $(eval $(call package,coq83patched))
 $(call requires,coq83patched,ocaml3 camlp5 hevea lablgtk)
 # Local Variables:
