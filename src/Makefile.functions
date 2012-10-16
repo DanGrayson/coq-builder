@@ -1,3 +1,5 @@
+all:
+
 topdir := $(shell cd .. && /bin/pwd)
 files_dir = $1/files
 build_dir = $(call files_dir,$1)/$(value $1_dir)
@@ -6,6 +8,8 @@ svn-checkout = cd $(call files_dir,$1) && svn co --quiet $2 $3
 svn-update = cd $(call build_dir,$1) && svn co $2 $3
 svn-get-release = cd $(call build_dir,$1) && ( svn info | grep Revision | sed 's/.*: //' )
 git-clone = cd $(call files_dir,$1) && git clone $2 $3
+git-fetch = cd $(call files_dir,$1) && git clone --no-checkout $2 $3
+git-checkout = cd $(call build_dir,$1) && git checkout $2
 untar-z = cd $(call files_dir,$1) && tar xzf $2
 untar-j = cd $(call files_dir,$1) && tar xjf $2
 install_dir = $(topdir)/encap/$1-$(value $1_version)
@@ -26,11 +30,13 @@ $(call files_dir,$1)/.made-fetch:
 	$(value $1_fetch)
 	touch $$@
 fetch-$1: $(call files_dir,$1)/.made-fetch
-unfetch-$1:; rm -f $(call files_dir,$1)/.made-fetch $(call build_dir,$1)
+unfetch-$1:; rm -rf $(call files_dir,$1)/.made-fetch $(call build_dir,$1)
 refetch-$1: unfetch-$1 $(call files_dir,$1)/.made-fetch
 $(call files_dir,$1)/.made-extract: $(call files_dir,$1)/.made-fetch
 	$(value $1_extract)
 	touch $$@
+unextract-$1:; rm -f $(call files_dir,$1)/.made-extract
+reextract-$1: unextract-$1 $(call files_dir,$1)/.made-extract
 extract-$1: $(call files_dir,$1)/.made-extract
 $(call files_dir,$1)/.made-configure: $(call files_dir,$1)/.made-extract
 	$(value $1_configure)
@@ -40,6 +46,7 @@ reconfigure-$1: unconfigure-$1 $(call files_dir,$1)/.made-configure
 $(call files_dir,$1)/.made-build: $(call files_dir,$1)/.made-configure
 	$(value $1_build)
 	touch $$@
+build-$1: $(call files_dir,$1)/.made-build
 unbuild-$1:; rm -f $(call files_dir,$1)/.made-build
 rebuild-$1: unbuild-$1 $(call files_dir,$1)/.made-build
 $(call files_dir,$1)/.made-install: $(call files_dir,$1)/.made-build $(call files_dir,epkg)/.made-build

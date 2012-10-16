@@ -1,0 +1,14 @@
+agda_version         = 2.3.0.1
+agda_dir            := Agda-$(agda_version)
+agda_fetch           = $(call wget,agda,http://code.haskell.org/Agda/Agda-$(agda_version).tar.gz)
+agda_extract         = $(call untar-z,agda,Agda-$(agda_version).tar.gz)
+agda_configure       = cd $(call build_dir,agda) && ./configure -prefix $(topdir)
+agda_build           = $(call make,agda)
+agda_install         = $(call make,agda,install PREFIX=$(topdir)/encap/$(agda_dir))
+
+$(eval $(call package,agda))
+$(call requires,agda,alex)
+
+# Local Variables:
+# compile-command: "make -C .. linkup-agda"
+# End:

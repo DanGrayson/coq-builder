@@ -7,6 +7,7 @@ gtksourceview2_configure       = $(call configure,gtksourceview2,--prefix=$(call
 gtksourceview2_build           = $(call make,gtksourceview2,all)
 gtksourceview2_install         = $(call make,gtksourceview2,install)
 $(eval $(call package,gtksourceview2))
+$(call requires,gtksourceview2,intltool)
 
 # Local Variables:
 # compile-command: "make -C .. linkup-gtksourceview2"
