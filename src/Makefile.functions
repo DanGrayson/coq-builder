@@ -58,7 +58,9 @@ install-$1: $(call files_dir,$1)/.made-install
 uninstall-$1:; rm -f $(call files_dir,$1)/.made-install
 reinstall-$1: uninstall-$1 $(call files_dir,$1)/.made-install
 $(call files_dir,$1)/.made-linkup: $(call files_dir,$1)/.made-install $(call files_dir,epkg)/.made-build
-	$(epkg) $1-$(value $1_version)
+	$(epkg) $1-$(value $1_version) | tee $$@.epkg-log
+	! grep '^    !' $$@.epkg-log >/dev/null
+	rm -f $$@.epkg-log
 	touch $$@
 relinkup-$1: unlinkup-$1 $(call files_dir,$1)/.made-linkup
 unlinkup-all: unlinkup-$1

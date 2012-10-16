@@ -7,7 +7,7 @@ PACKAGES = with \
 	   ocaml hevea \
 	   intltool gtksourceview2 lablgtk coq84hoq hott \
 	   ProofGeneral \
-	   camlp5 coq83patched \
+	   ocaml3 camlp5 coq83patched \
 	   alex agda
 $(foreach i, $(PACKAGES), $(eval include $i/Makefile.include))
 # note: /home/special/ is a directory at IAS that contains user directories:
