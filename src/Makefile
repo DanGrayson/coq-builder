@@ -1,4 +1,4 @@
-all : linkup-coq84hoq ../README.user linkup-ProofGeneral linkup-with
+all : linkup-gtksourceview2 linkup-lablgtk linkup-coq84hoq linkup-hott ../README.user linkup-ProofGeneral linkup-with
 include Makefile.functions
 # in the following list, prerequisites appear to the left
 PACKAGES = with ocaml hevea gtksourceview2 lablgtk coq84hoq hott ProofGeneral
