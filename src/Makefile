@@ -1,3 +1,4 @@
+include Makefile.functions
 all : linkup-coq84hoq ../README.user linkup-ProofGeneral linkup-with install-coqtrunk
 # in the following list, prerequisites appear to the left
 PACKAGES = with ocaml hevea gtksourceview2 lablgtk coq84hoq hott ProofGeneral
