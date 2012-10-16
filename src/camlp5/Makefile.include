@@ -8,8 +8,8 @@ camlp5_configure       = cd $(call build_dir,camlp5) && ./configure -prefix $(to
 camlp5_build           = $(call make,camlp5,all opt opt.opt)
 camlp5_install         = $(call make,camlp5,install PREFIX=$(topdir)/encap/$(camlp5_dir))
 $(eval $(call package,camlp5))
-# ocaml3 is installed at IAS
-# $(call requires,camlp5,ocaml3)
+# ocaml3 is installed at IAS, but we need to install it anyway so coq can use its location to find camlp5
+$(call requires,camlp5,ocaml3)
 
 # Local Variables:
 # compile-command: "make -C .. linkup-camlp5"

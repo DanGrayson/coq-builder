@@ -5,7 +5,7 @@ hevea_fetch           = $(call wget,hevea,http://hevea.inria.fr/distri/$(hevea_t
 hevea_extract         = $(call untar-z,hevea,$(hevea_tarfile))
 hevea_build           = $(call make,hevea,PREFIX=$(call install_dir,hevea))
 hevea_install         = $(call make,hevea,install PREFIX=$(call install_dir,hevea))
-$(call requires,hevea,ocaml)
+$(call requires,hevea,ocaml3)
 $(eval $(call package,hevea))
 # Local Variables:
 # compile-command: "make -C .. linkup-hevea"
