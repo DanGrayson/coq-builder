@@ -1,9 +1,10 @@
 topdir := $(shell cd .. && /bin/pwd)
-files_dir = $1/files-$(value $1_version)
+files_dir = $1/files
 build_dir = $(call files_dir,$1)/$(value $1_dir)
 wget = cd $(call files_dir,$1) && rm -f $(shell basename $2) && wget $2
 svn-checkout = cd $(call files_dir,$1) && svn co --quiet $2 $3
 svn-update = cd $(call build_dir,$1) && svn co $2 $3
+svn-get-release = cd $(call build_dir,$1) && ( svn info | grep Revision | sed 's/.*: //' )
 # git-clone = cd $(call files_dir,$1) && git clone --no-checkout $2
 untar-z = cd $(call files_dir,$1) && tar xzf $2
 untar-j = cd $(call files_dir,$1) && tar xjf $2
