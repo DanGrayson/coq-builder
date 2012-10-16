@@ -4,9 +4,9 @@ lablgtk_dir            := lablgtk
 lablgtk_fetch           = $(call git-fetch   ,lablgtk,http://forge.ocamlcore.org/anonscm/git/lablgtk/lablgtk.git,$(lablgtk_dir))
 lablgtk_extract         = $(call git-checkout,lablgtk,lablgtk2142)
 lablgtk_configure       = $(call configure,lablgtk,--with-libdir=$(call install_dir,lablgtk)/lib/ocaml --with-gtksourceview2 PKG_CONFIG_PATH=$(topdir)/lib/pkgconfig)
-lablgtk_build           = $(call make,lablgtk)
+lablgtk_build           = $(call make,lablgtk,all byte opt world)
 lablgtk_install         = $(call make,lablgtk,install)
-$(call requires,lablgtk,ocaml3 gtksourceview2)
+$(call requires,lablgtk,$(OCAMLSWITCH) gtksourceview2)
 $(eval $(call package,lablgtk))
 
 # Local Variables:
