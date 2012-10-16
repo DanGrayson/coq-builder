@@ -4,7 +4,7 @@ TOP=@TOPDIR@
 
 if [ $# = 0 ]
 then exec 1>&2
-     cmd=$(basename $0)
+     cmd=with
      echo "usage:"
      echo "   $cmd + command               (run command in the environment provided by $TOP)"
      echo "   . $cmd +                     (modify the environment of the current bash shell)"
