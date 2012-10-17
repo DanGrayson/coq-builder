@@ -2,12 +2,16 @@ include Makefile.functions
 all: ../README.user linkup-with
 all: linkup-coq84hoq linkup-ProofGeneral
 all: install-coqtrunk
+# for now we use ocaml3 instead of ocaml (version 4) off the list, which is too new for coq 8.3
+OCAMLSWITCH = ocaml3
+
 # in the following list, prerequisites appear to the left
 PACKAGES = with \
-	   ocaml hevea \
+	   $(OCAMLSWITCH) \
+	   hevea \
 	   intltool gtksourceview2 lablgtk coq84hoq hott \
 	   ProofGeneral \
-	   ocaml3 camlp5 coq83patched \
+	   camlp5 coq83patched \
 	   alex agda
 $(foreach i, $(PACKAGES), $(eval include $i/Makefile.include))
 # note: /home/special/ is a directory at IAS that contains user directories:

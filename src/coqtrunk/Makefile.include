@@ -4,7 +4,7 @@ coqtrunk_extract           = $(call svn-checkout,coqtrunk,svn://scm.gforge.inria
 coqtrunk_configure         = cd $(call build_dir,coqtrunk) && ./configure -opt -annotate -debug -prefix $(call install_dir,coqtrunk)
 coqtrunk_build             = $(call make,coqtrunk,KEEP_ML4_PREPROCESSED=true VERBOSE=true READABLE_ML4=yes world)
 coqtrunk_install           = $(call make,coqtrunk,install)
-$(call requires,coqtrunk,hevea lablgtk ocaml)
+$(call requires,coqtrunk,hevea lablgtk $(OCAMLSWITCH))
 $(eval $(call package,coqtrunk))
 
 # Local Variables:
