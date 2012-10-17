@@ -1,7 +1,24 @@
+# These are the apps we want to make visible to users:
+APPS = coq84hoq ProofGeneral with
+# These are the apps to build but make invisible by default, optionally visible using the "with" script:
+OTHER_APPS = coqtrunk
+
+all: ../README.user
+all: $(patsubst %,linkup-%,$(APPS))
+all: $(patsubst %,install-%,$(APPS))
+
 include Makefile.functions
-all: ../README.user linkup-with
-all: linkup-coq84hoq linkup-ProofGeneral
-all: install-coqtrunk
+
+# Here is a serial number used to specify distinct repositories for our compiled software,
+# so we always have a previous version to go back to, if necessary.
+ENCAP_SER_NO = 2
+# The software will be deposited in directories ../encap-$(ENCAP_SER_NO)/*-*/.
+# Use these targets to manage the symoblic links:
+linkup-all: all
+unlinkup-all:
+linkup-apps: $(patsubst %,linkup-%,$(APPS))
+unlinkup-apps: $(patsubst %,unlinkup-%,$(APPS))
+
 # for now we use ocaml3 instead of ocaml (version 4), which is too new for coq 8.3
 OCAMLSWITCH = ocaml3
 
@@ -17,5 +34,7 @@ PACKAGES = with \
 $(foreach i, $(PACKAGES), $(eval include $i/Makefile.include))
 # note: /home/special/ is a directory at IAS that contains user directories:
 ../README.user: README.user.prototype; sed -e 's@--THISDIRECTORY--@$(topdir)@g' -e 's@/home/special/@~@g' <$< >$@.tmp && rm -f $@ && mv $@.tmp $@ && chmod a-w $@
+unlinkup-all: clean-dangling-links
+clean-dangling-links: $(call files_dir,epkg)/.made-build; $(epkg) -c
 clean: clean-README.user
 clean-README.user:; rm -f ../README.user
