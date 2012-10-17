@@ -1,7 +1,7 @@
 hott_version           = 1.0
 hott_dir              := HoTT
 hott_extract           = $(call files-command,hott,git clone git://github.com/HoTT/HoTT.git $(hott_dir))
-hott_configure         = cd $(call build_dir,hott) && ./configure --prefix $(call install_dir,hott,$(hott_version))
+hott_configure         = cd $(call build_dir,hott) && ./configure --prefix $(call install_dir,hott)
 hott_build             = $(call make,hott,all)
 hott_install           = $(call make,hott,install)
 $(call requires,hott,coq84hoq)
