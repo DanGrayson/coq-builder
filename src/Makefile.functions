@@ -56,7 +56,7 @@ build-$1: $(call files_dir,$1)/.made-build
 unbuild-$1:; rm -f $(call files_dir,$1)/.made-build
 rebuild-$1: unbuild-$1 $(call files_dir,$1)/.made-build
 $(call files_dir,$1)/.made-install: $(call files_dir,$1)/.made-build $(call files_dir,epkg)/.made-build
-	-$(epkg) -r $1
+	$(epkg) -r $1 || true
 	rm -rf $(call install_dir,$1)
 	$(value $1_install)
 	touch $$@
@@ -71,7 +71,7 @@ $(call files_dir,$1)/.made-linkup: $(call files_dir,$1)/.made-install $(call fil
 relinkup-$1: unlinkup-$1 $(call files_dir,$1)/.made-linkup
 unlinkup-all: unlinkup-$1
 unlinkup-$1: $(call files_dir,epkg)/.made-build
-	-$(epkg) -r $1-$(value $1_version)
+	$(epkg) -r $1-$(value $1_version) || true
 	rm -f $(call files_dir,$1)/.made-linkup
 linkup-$1: $(call files_dir,$1)/.made-linkup
 clean: clean-$1
