@@ -1,7 +1,7 @@
 coqtrunk_version           = trunk
 coqtrunk_dir              := coq-$(coqtrunk_version)
 coqtrunk_extract           = $(call svn-checkout,coqtrunk,svn://scm.gforge.inria.fr/svn/coq/trunk,$(coqtrunk_dir))
-coqtrunk_configure         = cd $(call build_dir,coqtrunk) && ./configure -opt -annotate -debug -prefix $(call install_dir,coqtrunk)
+coqtrunk_configure         = $(call build-command,coqtrunk,./configure -opt -annotate -debug -prefix $(call install_dir,coqtrunk))
 coqtrunk_build             = $(call make,coqtrunk,KEEP_ML4_PREPROCESSED=true VERBOSE=true READABLE_ML4=yes world)
 coqtrunk_install           = $(call make,coqtrunk,install)
 $(call requires,coqtrunk,hevea lablgtk $(OCAMLSWITCH))
