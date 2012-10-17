@@ -4,7 +4,7 @@ ocaml3_fetch           = $(call wget,ocaml3,http://caml.inria.fr/pub/distrib/oca
 ocaml3_extract         = $(call untar-j,ocaml3,ocaml-$(ocaml3_version).tar.bz2)
 ocaml3_configure       = cd $(call build_dir,ocaml3) && ./configure -prefix $(topdir)
 ocaml3_build           = $(call make,ocaml3,world opt opt.opt)
-ocaml3_install         = $(call make,ocaml3,install PREFIX=$(topdir)/encap/ocaml3-$(ocaml3_version))
+ocaml3_install         = $(call make,ocaml3,install PREFIX=$(call install_dir,ocaml3))
 
 $(eval $(call package,ocaml3))
 

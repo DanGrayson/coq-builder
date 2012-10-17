@@ -1,8 +1,12 @@
 all:
 
+# we make topdir and topsrcdir absolute paths:
 topdir := $(shell cd .. && /bin/pwd)
+topsrcdir := $(shell /bin/pwd)
+# we keep files_dir and build_dir paths relative to the top of the source tree (this directory):
 files_dir = $1/files
 build_dir = $(call files_dir,$1)/$(value $1_dir)
+#
 wget = cd $(call files_dir,$1) && rm -f $(shell basename $2) && wget $2
 svn-checkout = cd $(call files_dir,$1) && svn co --quiet $2 $3
 svn-update = cd $(call build_dir,$1) && svn co $2 $3
@@ -12,7 +16,7 @@ git-fetch = false obsolete
 git-checkout = cd $(call build_dir,$1) && git checkout $2
 untar-z = cd $(call files_dir,$1) && tar xzf $2
 untar-j = cd $(call files_dir,$1) && tar xjf $2
-install_dir = $(topdir)/encap/$1-$(value $1_version)
+install_dir = $(topdir)/encap-$(ENCAP_SER_NO)/$1-$(value $1_version)
 files-command = cd $(call files_dir,$1) && $2
 build-command = cd $(call build_dir,$1) && $2
 configure = cd $(call build_dir,$1) && ./configure --prefix=$(call install_dir,$1) $2
@@ -71,7 +75,7 @@ unlinkup-$1: $(call files_dir,epkg)/.made-build
 	rm -f $(call files_dir,$1)/.made-linkup
 linkup-$1: $(call files_dir,$1)/.made-linkup
 clean: clean-$1
-clean-$1:; rm -rf $(call files_dir,$1)/.made-* $(call files_dir,$1)
+clean-$1:; rm -rf $(call files_dir,$1)
 endef
 
 include epkg/Makefile.include

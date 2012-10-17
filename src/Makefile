@@ -5,13 +5,15 @@ OTHER_APPS = coqtrunk
 
 all: ../README.user
 all: $(patsubst %,linkup-%,$(APPS))
-all: $(patsubst %,install-%,$(APPS))
+all: $(patsubst %,install-%,$(OTHER_APPS))
 
 include Makefile.functions
 
 # Here is a serial number used to specify distinct repositories for our compiled software,
-# so we always have a previous version to go back to, if necessary.
-ENCAP_SER_NO = 2
+# so we always have a previous version to go back to, if necessary.  Increment it manually at will.
+# (Do not put /encap into package makefiles.)
+ENCAP_SER_NO = 1
+encap_dir = $(topdir)/encap-$(ENCAP_SER_NO)
 # The software will be deposited in directories ../encap-$(ENCAP_SER_NO)/*-*/.
 # Use these targets to manage the symoblic links:
 linkup-all: all
@@ -34,7 +36,7 @@ PACKAGES = with \
 $(foreach i, $(PACKAGES), $(eval include $i/Makefile.include))
 # note: /home/special/ is a directory at IAS that contains user directories:
 ../README.user: README.user.prototype; sed -e 's@--THISDIRECTORY--@$(topdir)@g' -e 's@/home/special/@~@g' <$< >$@.tmp && rm -f $@ && mv $@.tmp $@ && chmod a-w $@
-unlinkup-all: clean-dangling-links
-clean-dangling-links: $(call files_dir,epkg)/.made-build; $(epkg) -c
+unlinkup-all: remove-dangling-links
+remove-dangling-links: $(call files_dir,epkg)/.made-build; $(epkg) -c
 clean: clean-README.user
 clean-README.user:; rm -f ../README.user

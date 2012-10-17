@@ -4,7 +4,7 @@ intltool_fetch           = $(call wget,intltool,http://launchpad.net/intltool/tr
 intltool_extract         = $(call untar-z,intltool,intltool-$(intltool_version).tar.gz)
 intltool_configure       = cd $(call build_dir,intltool) && ./configure -prefix $(topdir)
 intltool_build           = $(call make,intltool)
-intltool_install         = $(call make,intltool,install prefix=$(topdir)/encap/$(intltool_dir))
+intltool_install         = $(call make,intltool,install prefix=$(call install_dir,intltool))
 $(eval $(call package,intltool))
 # Local Variables:
 # compile-command: "make -C .. linkup-intltool"
