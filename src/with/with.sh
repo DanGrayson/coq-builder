@@ -23,7 +23,7 @@ fi
 for j in $1
 do if [ "$j" = + ]
    then i=$TOP
-   else i="$TOP/encap/$j"
+   else i="$TOP/encap-@ENCAP_SER_NO@/$j"
    fi
    if ! [ -d "$i" ]
    then echo "expected a directory: $i" >&2
