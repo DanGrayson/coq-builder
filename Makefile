@@ -1,1 +1,2 @@
-all:; +make -C src
+# see src/Makefile for details
+all clean:; +make -C src $@

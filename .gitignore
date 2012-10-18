@@ -5,7 +5,7 @@ include
 lib
 share
 man
-src/*/files-*
+src/*/files
 bin/*
 sbin
 README.user

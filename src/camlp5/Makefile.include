@@ -1,0 +1,16 @@
+# 6.06 may not work with coq 8.3; if so, try 6.05
+# 6.05 refuses to build with ocaml 4
+camlp5_version         = 6.06
+camlp5_dir            := camlp5-$(camlp5_version)
+camlp5_fetch           = $(call wget,camlp5,http://pauillac.inria.fr/~ddr/camlp5/distrib/src/camlp5-$(camlp5_version).tgz)
+camlp5_extract         = $(call untar-z,camlp5,camlp5-$(camlp5_version).tgz)
+camlp5_configure       = cd $(call build_dir,camlp5) && ./configure -prefix $(topdir)
+camlp5_build           = $(call make,camlp5,all opt opt.opt)
+camlp5_install         = $(call make,camlp5,install PREFIX=$(call install_dir,camlp5))
+$(eval $(call package,camlp5))
+# ocaml3 is installed at IAS, but we need to install it anyway so coq can use its location to find camlp5, which we install on top of it
+$(call requires,camlp5,$(OCAMLSWITCH))
+
+# Local Variables:
+# compile-command: "make -C .. linkup-camlp5"
+# End:

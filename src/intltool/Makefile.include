@@ -1,0 +1,11 @@
+intltool_version         = 0.50.2
+intltool_dir            := intltool-$(intltool_version)
+intltool_fetch           = $(call wget,intltool,http://launchpad.net/intltool/trunk/0.50.2/+download/intltool-$(intltool_version).tar.gz)
+intltool_extract         = $(call untar-z,intltool,intltool-$(intltool_version).tar.gz)
+intltool_configure       = cd $(call build_dir,intltool) && ./configure -prefix $(topdir)
+intltool_build           = $(call make,intltool)
+intltool_install         = $(call make,intltool,install prefix=$(call install_dir,intltool))
+$(eval $(call package,intltool))
+# Local Variables:
+# compile-command: "make -C .. linkup-intltool"
+# End:

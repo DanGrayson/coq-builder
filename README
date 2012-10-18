@@ -1,4 +1,0 @@
-This is a system of makefiles to build coq and the programs it needs.
-
-Refer to the file INSTALL for installation or to the file README.user for user
-instructions.
