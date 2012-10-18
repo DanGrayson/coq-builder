@@ -1,7 +1,7 @@
 # These are the apps we want to make visible to users:
 APPS = coq84hoq hott ProofGeneral with
 # These are the apps to build but make invisible by default, optionally visible using the "with" script:
-OTHER_APPS = coqtrunk
+OTHER_APPS = coqtrunk coq83patched
 
 # use "make FORCE_LINKS=yes" to force replacement of links remaining from another installation
 # see Makefile.functions
