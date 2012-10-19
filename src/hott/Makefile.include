@@ -1,5 +1,9 @@
-# hott_URL	       = git://github.com/HoTT/HoTT.git
+# The following version fixes an error involving dependencies:
+#   Error: Cannot find library Logic in loadpath
+# After the pull request, revert to the original URL
 hott_URL	       = git@github.com:DanGrayson/HoTT.git
+# hott_URL	       = git://github.com/HoTT/HoTT.git
+
 hott_version           = 1.0
 hott_dir              := HoTT
 hott_extract           = $(call files-command,hott,git clone $(hott_URL) $(hott_dir))
