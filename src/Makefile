@@ -41,6 +41,6 @@ $(foreach i, $(PACKAGES), $(eval include $i/Makefile.include))
 ../README.user: README.user.prototype; sed -e 's@--THISDIRECTORY--@$(topdir)@g' -e 's@/home/special/@~@g' <$< >$@.tmp && rm -f $@ && mv $@.tmp $@ && chmod a-w $@
 unlinkup-all: remove-dangling-links
 remove-dangling-links: $(call files_dir,epkg)/.made-build
-	set -x ; $(epkg) -c -X src -X encap $(patsubst ../%,-X %,$(wildcard ../encap-*))
+	set -x ; $(epkg) -c -X src -X encap $(patsubst ../%,-X %,$(wildcard ../encap-*)) || true
 clean: clean-README.user
 clean-README.user:; rm -f ../README.user
