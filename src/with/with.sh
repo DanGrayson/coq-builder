@@ -43,7 +43,7 @@ PATH="$PATH"
 export PATH MANPATH LD_LIBRARY_PATH INFOPATH PKG_CONFIG_PATH
 
 shift
-eval "$@"
+"$@"
 # Local Variables:
 # compile-command: "make -C .. linkup-with"
 # End:
