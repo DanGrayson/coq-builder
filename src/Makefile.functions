@@ -1,7 +1,7 @@
 all:
 
 ifeq "$(FORCE_LINKS)" "yes"
-EPKG_OPTIONS = -f
+EPKG_OPTIONS = -f -v -v -X mkencap_environment
 endif
 
 # we make topdir and topsrcdir absolute paths:
@@ -68,7 +68,7 @@ install-$1: $(call files_dir,$1)/.made-install
 uninstall-$1:; rm -f $(call files_dir,$1)/.made-install
 reinstall-$1: uninstall-$1 $(call files_dir,$1)/.made-install
 $(call files_dir,$1)/.made-linkup: $(call files_dir,$1)/.made-install $(call files_dir,epkg)/.made-build
-	$(epkg) -v -v $(EPKG_OPTIONS) $1-$(value $1_version) | tee $$@.epkg-log
+	$(epkg) $(EPKG_OPTIONS) $1-$(value $1_version) 2>&1 | tee $$@.epkg-log
 	! grep '^    !' $$@.epkg-log >/dev/null
 	rm -f $$@.epkg-log
 	touch $$@
