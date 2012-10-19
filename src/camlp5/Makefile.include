@@ -9,7 +9,7 @@ camlp5_build           = $(call make,camlp5,all opt opt.opt)
 camlp5_install         = $(call make,camlp5,install PREFIX=$(call install_dir,camlp5))
 $(eval $(call package,camlp5))
 # ocaml3 is installed at IAS, but we need to install it anyway so coq can use its location to find camlp5, which we install on top of it
-$(call requires,camlp5,$(OCAMLSWITCH))
+$(call depends,camlp5,$(OCAMLSWITCH))
 
 # Local Variables:
 # compile-command: "make -C .. linkup-camlp5"

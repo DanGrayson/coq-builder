@@ -10,14 +10,15 @@ all: ../README.user
 all: $(patsubst %,linkup-%,$(APPS))
 all: $(patsubst %,install-%,$(OTHER_APPS))
 
-include Makefile.functions
-
 # Here is a serial number used to specify distinct repositories for our compiled software,
 # so we always have a previous version to go back to, if necessary.  Increment it manually at will.
 # (Do not put /encap into package makefiles.)
 ENCAP_SER_NO = 1
 encap_dir = $(topdir)/encap-$(ENCAP_SER_NO)
 # The software will be deposited in directories ../encap-$(ENCAP_SER_NO)/*-*/.
+
+include Makefile.functions
+
 # Use these targets to manage the symoblic links:
 linkup-all: all
 unlinkup-all:

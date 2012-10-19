@@ -6,7 +6,7 @@ lablgtk_extract         = $(call build-command,lablgtk, git checkout lablgtk2142
 lablgtk_configure       = $(call configure,lablgtk,--with-libdir=$(call install_dir,lablgtk)/lib/ocaml --with-gtksourceview2 PKG_CONFIG_PATH=$(topdir)/lib/pkgconfig)
 lablgtk_build           = $(call make,lablgtk,all byte opt world)
 lablgtk_install         = $(call make,lablgtk,install)
-$(call requires,lablgtk,$(OCAMLSWITCH) gtksourceview2)
+$(call depends,lablgtk,$(OCAMLSWITCH) gtksourceview2)
 $(eval $(call package,lablgtk))
 
 # Local Variables:
