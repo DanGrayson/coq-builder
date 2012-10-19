@@ -26,7 +26,9 @@ build-command = cd $(call build_dir,$1) && $2
 configure = cd $(call build_dir,$1) && ./configure --prefix=$(call install_dir,$1) $2
 make = cd $(call build_dir,$1) && make -w -j1 $2
 
-export PATH := $(topdir)/bin:$(PATH)
+export            PATH := $(topdir)/bin:$(PATH)
+export PKG_CONFIG_PATH := $(topdir)/lib/pkgconfig:$(PKG_CONFIG_PATH)
+export LD_LIBRARY_PATH := $(topdir)/lib:$(LD_LIBRARY_PATH)
 
 define requires
 $(foreach x,$2,$(eval $(call files_dir,$1)/.made-configure: $(call files_dir,$x)/.made-linkup))
