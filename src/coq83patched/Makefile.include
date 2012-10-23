@@ -9,7 +9,7 @@ coq83patched_build             = $(call make,coq83patched,world)
 coq83patched_install           = $(call make,coq83patched,install)
 update-coq83patched:;		 $(call build-command,coq83patched, git pull)
 $(eval $(call package,coq83patched))
-$(call requires,coq83patched,$(OCAMLSWITCH) camlp5 hevea lablgtk)
+$(call depends,coq83patched,$(OCAMLSWITCH) camlp5 hevea lablgtk)
 # Local Variables:
 # compile-command: "make -C .. update-coq83patched install-coq83patched"
 # End:

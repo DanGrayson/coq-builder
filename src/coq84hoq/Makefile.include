@@ -5,7 +5,7 @@ coq84hoq_extract           = $(call files-command,coq84hoq,git clone git://githu
 coq84hoq_configure         = cd $(call build_dir,coq84hoq) && ./configure -with-doc no -opt -annotate -debug -prefix $(call install_dir,coq84hoq)
 coq84hoq_build             = $(call make,coq84hoq,KEEP_ML4_PREPROCESSED=true VERBOSE=true READABLE_ML4=yes world)
 coq84hoq_install           = $(call make,coq84hoq,install)
-$(call requires,coq84hoq,hevea lablgtk $(OCAMLSWITCH))
+$(call depends,coq84hoq,hevea lablgtk $(OCAMLSWITCH))
 $(eval $(call package,coq84hoq))
 
 # Local Variables:

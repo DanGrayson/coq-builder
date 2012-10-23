@@ -30,11 +30,19 @@ export            PATH := $(topdir)/bin:$(PATH)
 export PKG_CONFIG_PATH := $(topdir)/lib/pkgconfig:$(PKG_CONFIG_PATH)
 export LD_LIBRARY_PATH := $(topdir)/lib:$(LD_LIBRARY_PATH)
 
+# order-only prerequisite
 define requires
-$(foreach x,$2,$(eval $(call files_dir,$1)/.made-configure: $(call files_dir,$x)/.made-linkup))
+$(foreach x,$2,$(eval $(call files_dir,$1)/.made-configure:| $(call files_dir,$x)/.made-linkup))
+endef
+
+# normal prerequisite
+define depends
+$(foreach x,$2,$(eval $(call files_dir,$1)/.made-configure:  $(call files_dir,$x)/.made-linkup))
 endef
 
 epkg = $(call build_dir,epkg)/epkg/epkg
+
+reinstall-all: uninstall-all
 
 define package
 $(call files_dir,$1)/.made-fetch:
@@ -61,7 +69,7 @@ $(call files_dir,$1)/.made-build: $(call files_dir,$1)/.made-configure
 build-$1: $(call files_dir,$1)/.made-build
 unbuild-$1:; rm -f $(call files_dir,$1)/.made-build
 rebuild-$1: unbuild-$1 $(call files_dir,$1)/.made-build
-$(call files_dir,$1)/.made-install: $(call files_dir,$1)/.made-build $(call files_dir,epkg)/.made-build
+$(call files_dir,$1)/.made-install: $(call files_dir,$1)/.made-build | $(call files_dir,epkg)/.made-build
 	$(epkg) -r $1 || true
 	rm -rf $(call install_dir,$1)
 	$(value $1_install)
@@ -71,16 +79,17 @@ $(call files_dir,$1)/.made-install: $(call files_dir,$1)/.made-build $(call file
 	touch $$@
 install-$1: $(call files_dir,$1)/.made-install
 uninstall-$1:; rm -f $(call files_dir,$1)/.made-install
+uninstall-all: uninstall-$1
 reinstall-$1: uninstall-$1 $(call files_dir,$1)/.made-install
 reinstall-all: reinstall-$1
-$(call files_dir,$1)/.made-linkup: $(call files_dir,$1)/.made-install $(call files_dir,epkg)/.made-build
+$(call files_dir,$1)/.made-linkup: $(call files_dir,$1)/.made-install | $(call files_dir,epkg)/.made-build
 	$(epkg) $(EPKG_OPTIONS) $1-$(value $1_version) 2>&1 | tee $$@.epkg-log
 	! grep '^    !' $$@.epkg-log >/dev/null
 	rm -f $$@.epkg-log
 	touch $$@
 relinkup-$1: unlinkup-$1 $(call files_dir,$1)/.made-linkup
 unlinkup-all: unlinkup-$1
-unlinkup-$1: $(call files_dir,epkg)/.made-build
+unlinkup-$1: | $(call files_dir,epkg)/.made-build
 	$(epkg) -r $1-$(value $1_version) || true
 	rm -f $(call files_dir,$1)/.made-linkup
 linkup-$1: $(call files_dir,$1)/.made-linkup
