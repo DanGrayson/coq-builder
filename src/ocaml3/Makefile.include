@@ -1,3 +1,4 @@
+ocaml3_basename	       = ocaml
 ocaml3_version         = 3.12.1
 ocaml3_dir            := ocaml-$(ocaml3_version)
 ocaml3_fetch           = $(call wget,ocaml3,http://caml.inria.fr/pub/distrib/ocaml-3.12/ocaml-$(ocaml3_version).tar.bz2)

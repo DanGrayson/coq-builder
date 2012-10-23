@@ -1,4 +1,5 @@
 with_version = 1
+with_dir = ..
 with_install =	mkdir -p $(call install_dir,with)/bin && \
 		sed -e 's\#@TOPDIR@\#$(topdir)\#g' \
 		    -e 's\#@ENCAP_SER_NO@\#$(ENCAP_SER_NO)\#g' \

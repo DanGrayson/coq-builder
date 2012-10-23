@@ -1,4 +1,5 @@
 # will not build with ocaml 4 or camlp5 6.06
+coq83patched_basename          = coq
 coq83patched_version           = latest
 coq83patched_dir              := coq-8.3
 coq83patched_fetch             = $(call files-command,coq83patched, git clone --no-checkout git@github.com:DanGrayson/coq.git $(coq83patched_dir))
