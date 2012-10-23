@@ -75,7 +75,7 @@ $(call files_dir,$1)/.made-install: $(call files_dir,$1)/.made-build | $(call fi
 	$(value $1_install)
 	mkdir -p $(call install_dir,$1)/packages
 	ln -s ../../../src/$(call build_dir,$1) $(call install_dir,$1)/packages/$1
-	$(if $(value $1_basename),ln -s $(call build_dir,$1) $(call install_dir,$1)/packages/$(value $1_basename),:)
+	$(if $(value $1_basename),ln -s ../../../src/$(call build_dir,$1) $(call install_dir,$1)/packages/$(value $1_basename),:)
 	touch $$@
 install-$1: $(call files_dir,$1)/.made-install
 uninstall-$1:; rm -f $(call files_dir,$1)/.made-install
