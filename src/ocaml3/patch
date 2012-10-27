@@ -1,0 +1,26 @@
+diff -ur tmp/ocaml-3.12.1/configure ocaml-3.12.1/configure
+--- tmp/ocaml-3.12.1/configure	2011-07-04 17:15:01.000000000 -0400
++++ ocaml-3.12.1/configure	2012-10-26 20:53:27.000000000 -0400
+@@ -259,7 +259,7 @@
+     bytecccompopts="-fno-defer-pop $gcc_warnings -DSHRINKED_GNUC"
+     mathlib="";;
+   *,*-*-darwin*)
+-    bytecccompopts="-fno-defer-pop -no-cpp-precomp $gcc_warnings"
++    bytecccompopts="-fno-defer-pop $gcc_warnings"
+     mathlib=""
+     # Tell gcc that we can use 32-bit code addresses for threaded code
+     # unless we are compiled for a shared library (-fPIC option)
+@@ -620,11 +620,11 @@
+     *-*-cygwin*)                  natdynlink=true;;
+     i[3456]86-*-linux*)           natdynlink=true;;
+     x86_64-*-linux*)              natdynlink=true;;
+-    i[3456]86-*-darwin10.*)
++    i[3456]86-*-darwin[89]*)      natdynlink=true;;
++    i[3456]86-*-darwin*)
+       if test $arch64 == true; then
+         natdynlink=true
+       fi;;
+-    i[3456]86-*-darwin[89]*)      natdynlink=true;;
+     powerpc64-*-linux*)           natdynlink=true;;
+     sparc-*-linux*)               natdynlink=true;;
+     i686-*-kfreebsd*)             natdynlink=true;;

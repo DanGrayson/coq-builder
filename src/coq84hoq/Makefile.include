@@ -2,7 +2,10 @@ coq84hoq_basename	   = coq
 coq84hoq_version           = 8.4hoq
 coq84hoq_dir              := coq-$(coq84hoq_version)
 coq84hoq_extract           = $(call files-command,coq84hoq,git clone git://github.com/HoTT/coq.git $(coq84hoq_dir))
-coq84hoq_configure         = cd $(call build_dir,coq84hoq) && ./configure -with-doc no -opt -annotate -debug -prefix $(call install_dir,coq84hoq)
+coq84hoq_configure         = set -x && \
+				cd $(call build_dir,coq84hoq) && \
+				./configure -with-doc no -opt -annotate -debug -prefix $(call install_dir,coq84hoq) | tee ../config.log && \
+				! grep "only the bytecode version of Coq will be available" ../config.log
 coq84hoq_build             = $(call make,coq84hoq,KEEP_ML4_PREPROCESSED=true VERBOSE=true READABLE_ML4=yes world)
 coq84hoq_install           = $(call make,coq84hoq,install)
 $(call depends,coq84hoq,hevea lablgtk $(OCAMLSWITCH))

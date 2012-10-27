@@ -30,7 +30,7 @@ OCAMLSWITCH = ocaml3
 
 # in the following list, prerequisites appear to the left
 PACKAGES = with \
-	   $(OCAMLSWITCH) \
+	   ocaml ocaml3 \
 	   hevea \
 	   intltool gtksourceview2 lablgtk coq84hoq hott \
 	   ProofGeneral \
