@@ -3,7 +3,7 @@ APPS = coq84hoq hott ProofGeneral with
 # These are the apps to build but make invisible by default, optionally visible using the "with" script:
 OTHER_APPS = coqtrunk
 
-# we need to build an "old" version of lablgtk to get this working:
+# we need to build an "old" version of lablgtk to get this working, so we disable it:
 # OTHER_APPS += coq83patched
 
 # use "make FORCE_LINKS=yes" to force replacement of links remaining from another installation
@@ -33,7 +33,7 @@ OCAMLSWITCH = ocaml3
 
 # in the following list, prerequisites appear to the left
 PACKAGES = with \
-	   $(OCAMLSWITCH) \
+	   ocaml ocaml3 \
 	   hevea \
 	   intltool gtksourceview2 lablgtk lablgtkold coq84hoq hott \
 	   ProofGeneral \

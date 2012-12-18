@@ -10,3 +10,4 @@ src/*/files
 bin/*
 sbin
 README.user
+packages

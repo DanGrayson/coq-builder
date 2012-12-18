@@ -37,10 +37,13 @@ do if [ "$j" = + ]
    [ -d "$i"/share/info -a ! -h "$i"/share/info ] && INFOPATH="$i"/share/info:$INFOPATH
    [ -d "$i"/lib ] && LD_LIBRARY_PATH="$i"/lib:$LD_LIBRARY_PATH
    [ -d "$i"/lib/pkgconfig ] && PKG_CONFIG_PATH="$i"/lib/pkgconfig:$PKG_CONFIG_PATH
+   [ -f "$i"/packages/coq/kernel/names.ml ] && COQHOME=$i/packages/coq
+   [ -f "$i"/packages/ocaml/stdlib/stream.ml ] && OCAMLHOME=$i/packages/ocaml
+   [ -f "$i"/packages/camlp5/lib/extfold.ml ] && CAMLP5HOME=$i/packages/camlp5
 done
 
 PATH="$PATH"
-export PATH MANPATH LD_LIBRARY_PATH INFOPATH PKG_CONFIG_PATH
+export PATH MANPATH LD_LIBRARY_PATH INFOPATH PKG_CONFIG_PATH COQHOME OCAMLHOME CAMLP5HOME
 
 shift
 "$@"

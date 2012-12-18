@@ -31,16 +31,21 @@ export PKG_CONFIG_PATH := $(topdir)/lib/pkgconfig:$(PKG_CONFIG_PATH)
 export LD_LIBRARY_PATH := $(topdir)/lib:$(LD_LIBRARY_PATH)
 
 # order-only prerequisite
+# the current package needs the prerequisite to be there
 define requires
 $(foreach x,$2,$(eval $(call files_dir,$1)/.made-configure:| $(call files_dir,$x)/.made-linkup))
 endef
 
 # normal prerequisite
+# the current package needs the prerequisite to be there and
+# the current package should be rebuilt if the prerequisite is newer
 define depends
 $(foreach x,$2,$(eval $(call files_dir,$1)/.made-configure:  $(call files_dir,$x)/.made-linkup))
 endef
 
 epkg = $(call build_dir,epkg)/epkg/epkg
+
+reinstall-all: uninstall-all
 
 define package
 $(call files_dir,$1)/.made-fetch:
@@ -71,10 +76,15 @@ $(call files_dir,$1)/.made-install: $(call files_dir,$1)/.made-build | $(call fi
 	$(epkg) -r $1 || true
 	rm -rf $(call install_dir,$1)
 	$(value $1_install)
+	mkdir -p $(call install_dir,$1)/packages
+	ln -s ../../../src/$(call build_dir,$1) $(call install_dir,$1)/packages/$1
+	$(if $(value $1_basename),ln -s ../../../src/$(call build_dir,$1) $(call install_dir,$1)/packages/$(value $1_basename),:)
 	touch $$@
 install-$1: $(call files_dir,$1)/.made-install
 uninstall-$1:; rm -f $(call files_dir,$1)/.made-install
+uninstall-all: uninstall-$1
 reinstall-$1: uninstall-$1 $(call files_dir,$1)/.made-install
+reinstall-all: reinstall-$1
 $(call files_dir,$1)/.made-linkup: $(call files_dir,$1)/.made-install | $(call files_dir,epkg)/.made-build
 	$(epkg) $(EPKG_OPTIONS) $1-$(value $1_version) 2>&1 | tee $$@.epkg-log
 	! grep '^    !' $$@.epkg-log >/dev/null

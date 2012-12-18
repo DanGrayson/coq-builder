@@ -1,8 +1,14 @@
+ocaml3_basename	       = ocaml
 ocaml3_version         = 3.12.1
 ocaml3_dir            := ocaml-$(ocaml3_version)
 ocaml3_fetch           = $(call wget,ocaml3,http://caml.inria.fr/pub/distrib/ocaml-3.12/ocaml-$(ocaml3_version).tar.bz2)
-ocaml3_extract         = $(call untar-j,ocaml3,ocaml-$(ocaml3_version).tar.bz2)
-ocaml3_configure       = cd $(call build_dir,ocaml3) && ./configure -prefix $(topdir)
+ocaml3_extract         = set -x && \
+			 $(call untar-j,ocaml3,ocaml-$(ocaml3_version).tar.bz2) && \
+			 patch -p0 < ../patch
+ocaml3_configure       = set -x && \
+			 cd $(call build_dir,ocaml3) && \
+			 ./configure -prefix $(topdir) | tee ../config.log && \
+			 ! grep "native dynlink.*false" ../config.log
 ocaml3_build           = $(call make,ocaml3,world opt opt.opt)
 ocaml3_install         = $(call make,ocaml3,install PREFIX=$(call install_dir,ocaml3))
 

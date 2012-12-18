@@ -1,6 +1,7 @@
 # will not build with ocaml 4 or camlp5 6.06
 # we build with an old version of lablgtk that doesn't have the latest modifier keys
 # we fix up the file config/coq_config.ml because the configure script does a bad job escaping quotation marks
+coq83patched_basename          = coq
 coq83patched_version           = latest
 coq83patched_dir              := coq-8.3
 coq83patched_fetch             = $(call files-command,coq83patched, git clone --no-checkout https://github.com/DanGrayson/coq.git $(coq83patched_dir))
@@ -22,7 +23,7 @@ coq83patched_build             = $(call make,coq83patched,world)
 coq83patched_install           = $(call make,coq83patched,install)
 update-coq83patched:;		 $(call build-command,coq83patched, git pull)
 $(eval $(call package,coq83patched))
-$(call depends,coq83patched,$(OCAMLSWITCH) camlp5 hevea lablgtk)
+$(call requires,coq83patched,$(OCAMLSWITCH) camlp5 hevea lablgtk)
 # Local Variables:
 # compile-command: "make -C .. update-coq83patched install-coq83patched"
 # End:

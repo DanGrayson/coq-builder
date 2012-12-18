@@ -1,3 +1,4 @@
+coqtrunk_basename          = coq
 coqtrunk_version           = trunk
 coqtrunk_dir              := coq-$(coqtrunk_version)
 coqtrunk_extract           = $(call svn-checkout,coqtrunk,svn://scm.gforge.inria.fr/svn/coq/trunk,$(coqtrunk_dir))
