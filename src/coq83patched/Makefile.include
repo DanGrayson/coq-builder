@@ -1,9 +1,23 @@
 # will not build with ocaml 4 or camlp5 6.06
+# we build with an old version of lablgtk that doesn't have the latest modifier keys
+# we fix up the file config/coq_config.ml because the configure script does a bad job escaping quotation marks
 coq83patched_version           = latest
 coq83patched_dir              := coq-8.3
-coq83patched_fetch             = $(call files-command,coq83patched, git clone --no-checkout git@github.com:DanGrayson/coq.git $(coq83patched_dir))
+coq83patched_fetch             = $(call files-command,coq83patched, git clone --no-checkout https://github.com/DanGrayson/coq.git $(coq83patched_dir))
 coq83patched_extract           = $(call build-command,coq83patched, git checkout 8.3+recommended-patches)
-coq83patched_configure         = $(call build-command,coq83patched, ./configure --prefix $(call install_dir,coq83patched) -with-doc no)
+coq83patched_configure         = $(call build-command,coq83patched, \
+					./configure \
+					-prefix $(call install_dir,coq83patched) \
+					-lablgtkdir $(topdir)/encap-$(ENCAP_SER_NO)/lablgtkold-$(lablgtkold_version)/lib/ocaml/lablgtk2 \
+					&& \
+					sed 's/\(let coqideincl = "-I \)"\(.*\)""/\1\\"\2\\""/' <config/coq_config.ml >config/coq_config.ml.tmp \
+					&& \
+					chmod +w config/coq_config.ml \
+					&& \
+					mv config/coq_config.ml.tmp config/coq_config.ml \
+					&& \
+					chmod +w config/coq_config.ml \
+					)
 coq83patched_build             = $(call make,coq83patched,world)
 coq83patched_install           = $(call make,coq83patched,install)
 update-coq83patched:;		 $(call build-command,coq83patched, git pull)

@@ -1,7 +1,7 @@
 ProofGeneral_version         = 4.2pre120914
 ProofGeneral_dir            := ProofGeneral-$(ProofGeneral_version)
 # old URL was http://ProofGeneral.inf.ed.ac.uk/releases/ProofGeneral-4.2pre120914.tgz
-ProofGeneral_fetch           = $(call files-command,ProofGeneral, git clone git@github.com:DanGrayson/ProofGeneral.git $(ProofGeneral_dir))
+ProofGeneral_fetch           = $(call files-command,ProofGeneral, git clone https://github.com/DanGrayson/ProofGeneral.git $(ProofGeneral_dir))
 ProofGeneral_prefixes        = DEST_PREFIX=$(topdir) PREFIX=$(call install_dir,ProofGeneral)
 ProofGeneral_build           = $(call make,ProofGeneral,EMACS=/usr/bin/emacs $(ProofGeneral_prefixes))
 ProofGeneral_install         = $(call make,ProofGeneral,install $(ProofGeneral_prefixes))

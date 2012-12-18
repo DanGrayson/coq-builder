@@ -3,14 +3,25 @@
 # (such as HYPER) have not been added, so the coqide code will compile in this
 # old version of coq
 
+# But that no longer works, as they've added the modifiers.  I guess we need two
+# versions of lablgtk, both just installed, not linked up.  The old one would be from
+# commit d16e74d5981c3ab9be68a862f49469178ede2ed4, and the new one could be
+# the latest release.
+
 # Hint on Mac OS X with homebrew: cairo, gtk+, and libxml2 are installed in the
 # Cellar, so you may have to add Cellar/{cairo,gtk+,libxml2}/*/lib/pkgconfig to
 # PKG_CONFIG_PATH.
 
-lablgtk_version         = 2.14.2
+# lablgtk_version         = 2.14.2
+lablgtk_version         = 2.16.0
+
 lablgtk_dir             = lablgtk
 lablgtk_fetch           = $(call files-command,lablgtk, git clone --no-checkout http://forge.ocamlcore.org/anonscm/git/lablgtk/lablgtk.git $(lablgtk_dir))
 lablgtk_extract         = $(call build-command,lablgtk, git checkout master)
+
+# this is what we'll use for an "old" version
+# lablgtk_extract         = $(call build-command,lablgtk, git checkout d16e74d5981c3ab9be68a862f49469178ede2ed4)
+
 lablgtk_configure       = $(call configure,lablgtk,--with-libdir=$(call install_dir,lablgtk)/lib/ocaml --with-gtksourceview2)
 lablgtk_build           = $(call make,lablgtk,all byte opt world)
 lablgtk_install         = $(call make,lablgtk,old-install)

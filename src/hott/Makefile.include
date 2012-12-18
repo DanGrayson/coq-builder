@@ -1,14 +1,17 @@
-# The following version fixes an error involving dependencies:
-#   Error: Cannot find library Logic in loadpath
-# After the pull request, revert to the original URL
-hott_URL	       = git@github.com:DanGrayson/HoTT.git
-# hott_URL	       = git://github.com/HoTT/HoTT.git
+# There is still something wrong with the way the hott makefile handles the dependencies, and sometimes
+# it compiles Datatypes before compiling Logic.  One thing to try is to run make again.  Another is
+# to remove the minus sign in front of "include .depend" in files/HoTT/Makefile.
+
+# my old one:
+# hott_URL = git@github.com:DanGrayson/HoTT.git
+
+hott_URL	       = https://github.com/HoTT/HoTT.git
 
 hott_version           = 1.0
 hott_dir              := HoTT
 hott_extract           = $(call files-command,hott,git clone $(hott_URL) $(hott_dir))
 hott_configure         = cd $(call build_dir,hott) && ./configure --prefix $(call install_dir,hott)
-hott_build             = $(call make,hott,all)
+hott_build             = $(call make,hott,.depend) && $(call make,hott,all)
 hott_install           = $(call make,hott,install)
 $(call depends,hott,coq84hoq)
 $(eval $(call package,hott))

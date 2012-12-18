@@ -1,0 +1,21 @@
+# We purposely get an old version where all the latest X11 modifiers
+# (such as HYPER) have not been added, so the coqide code will compile in an
+# old version of coq (8.3)
+
+# Hint on Mac OS X with homebrew: cairo, gtk+, and libxml2 are installed in the
+# Cellar, so you may have to add Cellar/{cairo,gtk+,libxml2}/*/lib/pkgconfig to
+# PKG_CONFIG_PATH.
+
+lablgtkold_version         = 2.14.2
+lablgtkold_dir             = lablgtkold
+lablgtkold_fetch           = $(call files-command,lablgtkold, git clone --no-checkout http://forge.ocamlcore.org/anonscm/git/lablgtk/lablgtk.git $(lablgtkold_dir))
+lablgtkold_extract         = $(call build-command,lablgtkold, git checkout d16e74d5981c3ab9be68a862f49469178ede2ed4)
+lablgtkold_configure       = $(call configure,lablgtkold,--with-libdir=$(call install_dir,lablgtkold)/lib/ocaml --with-gtksourceview2)
+lablgtkold_build           = $(call make,lablgtkold,all byte opt world)
+lablgtkold_install         = $(call make,lablgtkold,install)
+$(call depends,lablgtkold,$(OCAMLSWITCH) gtksourceview2)
+$(eval $(call package,lablgtkold))
+
+# Local Variables:
+# compile-command: "make -C .. install-lablgtkold"
+# End:
