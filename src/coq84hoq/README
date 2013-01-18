@@ -1,0 +1,3 @@
+bin/coqtop -boot   -compile theories/Numbers/Cyclic/DoubleCyclic/DoubleCyclic
+
+uses 1.3GB, so, including the Debian 6.0 OS, RAM should be 1.6GB minimum.

@@ -13,7 +13,7 @@ lablgtkold_extract         = $(call build-command,lablgtkold, git checkout d16e7
 lablgtkold_configure       = $(call configure,lablgtkold,--with-libdir=$(call install_dir,lablgtkold)/lib/ocaml --with-gtksourceview2)
 lablgtkold_build           = $(call make,lablgtkold,all byte opt world)
 lablgtkold_install         = $(call make,lablgtkold,install)
-$(call depends,lablgtkold,$(OCAMLSWITCH) gtksourceview2)
+$(call depends,lablgtkold,$(OCAMLSWITCH) )
 $(eval $(call package,lablgtkold))
 
 # Local Variables:

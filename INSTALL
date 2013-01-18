@@ -4,3 +4,54 @@ Quick start for software builders, do once for the users, after putting
 this directory tree in the final location:
 
       make
+
+-----------------------------------------------------------------------------
+
+Hints about specific systems:
+
+   Under Debian 6.0 (date 2012/12) install these optional packages:
+      autoconf autotools-dev automake libxml2-dev libgtksourceview2.0-dev
+
+-----------------------------------------------------------------------------
+
+A possible configure of files in your home directory, assuming /usr/local/hott
+is the path to this directory:
+
+   add these symbolic links:
+
+	debian$ cd /usr/local/bin
+	debian$ ls -l
+	total 0
+	lrwxrwxrwx 1 root staff 16 Dec 19 21:04 coqc -> ../hott/bin/hoqc
+	lrwxrwxrwx 1 root staff 18 Dec 19 21:04 coqide -> ../hott/bin/hoqide
+	lrwxrwxrwx 1 root staff 18 Dec 19 21:04 coqtop -> ../hott/bin/hoqtop
+
+   add to .profile:
+
+	PATH=/usr/local/hott/bin:$PATH
+	export PATH
+
+   add to .emacs:
+
+	;; Proof General
+	(setq load-path 
+	      (append
+	       '( 
+		  "/usr/local/hott/share/emacs/site-lisp" 
+		  "/usr/local/hott/share/emacs/site-lisp/ProofGeneral/generic" 
+		  )
+	       load-path
+	       ))
+	(load-library "proof-site") ;normally installed in /usr/share/emacs/site-lisp
+	(custom-set-variables
+	  ;; custom-set-variables was added by Custom.
+	  ;; If you edit it by hand, you could mess it up, so be careful.
+	  ;; Your init file should contain only one such instance.
+	  ;; If there is more than one, they won't work right.
+	 '(coq-prog-name "/usr/local/hott/bin/hoqtop"))
+	(custom-set-faces
+	  ;; custom-set-faces was added by Custom.
+	  ;; If you edit it by hand, you could mess it up, so be careful.
+	  ;; Your init file should contain only one such instance.
+	  ;; If there is more than one, they won't work right.
+	 )
