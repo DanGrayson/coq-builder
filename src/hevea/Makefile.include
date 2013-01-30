@@ -1,4 +1,4 @@
-hevea_version         = 2.00
+hevea_version         = 2.02
 hevea_dir            := hevea-$(hevea_version)
 hevea_tarfile         = hevea-$(hevea_version).tar.gz
 hevea_fetch           = $(call wget,hevea,http://hevea.inria.fr/distri/$(hevea_tarfile))
