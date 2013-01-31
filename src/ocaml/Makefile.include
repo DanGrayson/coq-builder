@@ -1,4 +1,4 @@
-ocaml_version         = 4.00.1
+ocaml_version         = 4.00.0
 ocaml_dir            := ocaml-$(ocaml_version)
 ocaml_fetch           = $(call wget,ocaml,http://caml.inria.fr/pub/distrib/ocaml-4.00/ocaml-$(ocaml_version).tar.bz2)
 ocaml_extract         = $(call untar-j,ocaml,ocaml-$(ocaml_version).tar.bz2)
