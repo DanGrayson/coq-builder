@@ -42,7 +42,6 @@ do if [ "$j" = + ]
    [ -f "$i"/packages/camlp5/lib/extfold.ml ] && CAMLP5HOME=$i/packages/camlp5
 done
 
-PATH="$PATH"
 export PATH MANPATH LD_LIBRARY_PATH INFOPATH PKG_CONFIG_PATH COQHOME OCAMLHOME CAMLP5HOME
 
 shift
