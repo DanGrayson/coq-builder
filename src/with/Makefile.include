@@ -7,7 +7,6 @@ with_install =	mkdir -p $(call install_dir,with)/bin && \
 			>$(call install_dir,with)/bin/with && \
 		chmod a+x $(call install_dir,with)/bin/with
 $(call files_dir,with)/.made-install: with/with.sh with/Makefile.include
-$(call requires,with)
 $(eval $(call package,with))
 # Local Variables:
 # compile-command: "make -C .. linkup-with"

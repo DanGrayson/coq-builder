@@ -18,6 +18,7 @@ svn-get-release = cd $(call build_dir,$1) && ( svn info | grep Revision | sed 's
 git-clone = false obsolete
 git-fetch = false obsolete
 git-checkout = cd $(call build_dir,$1) && git checkout $2
+git-update = cd $(call build_dir,$1) && git pull
 untar-z = cd $(call files_dir,$1) && tar xzf $2
 untar-j = cd $(call files_dir,$1) && tar xjf $2
 install_dir = $(topdir)/encap-$(ENCAP_SER_NO)/$1-$(value $1_version)
@@ -98,6 +99,18 @@ unlinkup-$1: | $(call files_dir,epkg)/.made-build
 linkup-$1: $(call files_dir,$1)/.made-linkup
 clean: clean-$1
 clean-$1:; rm -rf $(call files_dir,$1)
+status: status-$1
+status-$1:
+	@ if test -d $(call build_dir,$1) -a "$(value $1_status)" ;\
+	  then (echo ================ $1 status ================= ;\
+		$(value $1_status)) ;\
+	  fi
+diff: diff-$1
+diff-$1:
+	@ if test -d $(call build_dir,$1) -a "$(value $1_diff)" ;\
+	  then (echo ================ $1 diff ================= ;\
+		$(value $1_diff)) ;\
+	  fi
 endef
 
 include epkg/Makefile.include

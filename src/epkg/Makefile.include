@@ -1,9 +1,11 @@
 epkg_version         := 2.3.9
 epkg_dir             := epkg-$(epkg_version)
-epkg_fetch           = $(call files-command,epkg,git clone https://github.com/DanGrayson/epkg.git epkg-$(epkg_version))
+epkg_fetch           = $(call files-command,epkg,git clone $(GITHUB_DANGRAYSON)/epkg.git epkg-$(epkg_version))
 epkg_configure       = $(call configure,epkg,--with-encap-target=$(topdir) --with-encap-source=$(encap_dir) --bindir=$(call install_dir,epkg)/sbin)
 epkg_build           = $(call make,epkg,all)
 epkg_install         = $(call make,epkg,install)
+epkg_status          = $(call build-command,epkg,git status)
+epkg_diff            = $(call build-command,epkg,git diff)
 
 $(eval $(call package,epkg))
 

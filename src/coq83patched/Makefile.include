@@ -4,8 +4,10 @@
 coq83patched_basename          = coq
 coq83patched_version           = latest
 coq83patched_dir              := coq-8.3
-coq83patched_fetch             = $(call files-command,coq83patched, git clone --no-checkout https://github.com/DanGrayson/coq.git $(coq83patched_dir))
+coq83patched_fetch             = $(call files-command,coq83patched, git clone --no-checkout $(GITHUB_DANGRAYSON)/coq.git $(coq83patched_dir))
 coq83patched_extract           = $(call build-command,coq83patched, git checkout 8.3+recommended-patches)
+coq83patched_status            = $(call build-command,coq83patched,git status)
+coq83patched_diff              = $(call build-command,coq83patched,git diff)
 coq83patched_configure         = $(call build-command,coq83patched, \
 					./configure \
 					-prefix $(call install_dir,coq83patched) \

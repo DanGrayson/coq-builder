@@ -1,10 +1,18 @@
 # These are the apps we want to make visible to users:
-APPS = coq84hoq hott ProofGeneral with
+APPS = coq84hoq hott ProofGeneral checker with
 # These are the apps to build but make invisible by default, optionally visible using the "with" script:
 #OTHER_APPS = coqtrunk
 
 # we need to build an "old" version of lablgtk to get this working, so we disable it:
 # OTHER_APPS += coq83patched
+
+# override this to "yes" to use ssh to access repositories at github.com/DanGrayson
+DEVEL_DAN = no
+ifeq "$(DEVEL_DAN)" "no"
+GITHUB_DANGRAYSON = https://github.com/DanGrayson
+else
+GITHUB_DANGRAYSON = git@github.com:DanGrayson
+endif
 
 # use "make FORCE_LINKS=yes" to force replacement of links remaining from another installation
 # see Makefile.functions
@@ -38,6 +46,7 @@ PACKAGES = with \
 	   intltool gtksourceview2 lablgtk lablgtkold coq84hoq hott \
 	   ProofGeneral \
 	   camlp5 coq83patched \
+	   checker \
 	   coqtrunk \
 	   alex agda
 $(foreach i, $(PACKAGES), $(eval include $i/Makefile.include))
