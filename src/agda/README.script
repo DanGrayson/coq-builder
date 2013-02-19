@@ -1,0 +1,81 @@
+-*- sh -*-
+
+Here is a script that Guillaume Brunerie wrote for compiling agda:
+
+#!/bin/sh
+
+if [ $# != 1 ]
+then
+    echo "Usage: $0 [dir]"
+    echo "Installs cabal, Agda and all needed libraries locally to the [dir]"
+    echo "directory."
+    echo "Uses ghc-6.12.3 which is already installed on the IAS computers, even"
+    echo "if it’s a bit old."
+    exit 1
+fi
+
+if [ -d $1 ]
+then
+    echo "Directory $1 already exists"
+    exit 2
+fi
+
+mkdir $1
+cd $1
+
+# We first need to install `cabal' which is a package manager for Haskell.
+# Cabal installs everything in the directory $HOME/.cabal and there is no way to
+# change this, so I will change the $HOME environment variable instead…
+export HOME=$PWD
+# Also, executables are installed in $HOME/.cabal/bin and we need it
+to be in the
+# PATH because for instance `alex' and `happy' are lexer and parser
+generators and
+# packages using them expect them to be in the PATH
+export PATH=$PATH:$HOME/.cabal/bin
+
+### Installation of cabal
+
+wget http://hackage.haskell.org/packages/archive/cabal-install/0.14.0/cabal-install-0.14.0.tar.gz
+tar -zxf cabal-install-0.14.0.tar.gz
+cd cabal-install-0.14.0
+# The following command will install the `cabal' executable into
+$HOME/.cabal/bin
+sh ./bootstrap.sh
+cd ..
+
+### Some libraries
+
+# Updating the database.
+# Cabal will tell us that there is a new version of `cabal-install' available,
+# except that this new version does not compile with ghc 6.12.3 so we will not
+# install it.
+cabal update
+
+# The latest version of `haskeline' does not compile with ghc 6.12.3
+cabal install haskeline-0.6.4.5
+
+# There seems to be a problem with dependency resolution so I need to install
+# `happy' and `alex' separately
+cabal install happy
+cabal install alex
+
+### Installation of Agda
+
+# Getting the source code, might take some time
+darcs get --lazy http://code.haskell.org/Agda
+cd Agda
+# Installing Agda and every other library that Agda is depending on
+cabal install
+
+cd ..
+
+# The `agda' executable should now be in $HOME/.cabal/bin and should be working.
+
+# To install Agda’s emacs mode, `agda-mode' should be present in the
+PATH (it has
+# also been installed in $HOME/.cabal/bin) and the following lines should be
+# added to the .emacs file
+#
+#  (load-file (let ((coding-system-for-read 'utf-8))
+#                  (shell-command-to-string "agda-mode locate")))
