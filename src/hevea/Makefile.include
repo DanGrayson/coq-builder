@@ -1,4 +1,9 @@
-hevea_version         = 2.02
+# The hevea download web site is frustrating: tar files for one version
+# disappear as soon as a newer one is available, and there is no URL
+# available for accessing the most recent one.  So, if the download fails,
+# look at the web site and bump the version number here.
+
+hevea_version         = 2.03
 hevea_dir            := hevea-$(hevea_version)
 hevea_tarfile         = hevea-$(hevea_version).tar.gz
 hevea_fetch           = $(call wget,hevea,http://hevea.inria.fr/distri/$(hevea_tarfile))
