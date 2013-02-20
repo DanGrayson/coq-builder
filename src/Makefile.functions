@@ -36,6 +36,9 @@ export LD_LIBRARY_PATH := $(topdir)/lib:$(LD_LIBRARY_PATH)
 define requires
 $(foreach x,$2,$(eval $(call files_dir,$1)/.made-configure:| $(call files_dir,$x)/.made-linkup))
 endef
+define requires_install
+$(foreach x,$2,$(eval $(call files_dir,$1)/.made-configure:| $(call files_dir,$x)/.made-install))
+endef
 
 # normal prerequisite
 # the current package needs the prerequisite to be there and
