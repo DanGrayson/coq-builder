@@ -14,8 +14,8 @@ Hints about specific systems:
 
 -----------------------------------------------------------------------------
 
-A possible configure of files in your home directory, assuming /usr/local/hott
-is the path to this directory:
+A possible configuration of files in your home directory, assuming
+/usr/local/hott is the path to this directory:
 
    add these symbolic links:
 
