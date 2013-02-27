@@ -14,7 +14,7 @@ else
 GITHUB_DANGRAYSON = git@github.com:DanGrayson
 endif
 
-OS := $(shell uname -o)
+OS := $(shell uname)
 
 # use "make FORCE_LINKS=yes" to force replacement of links remaining from another installation
 # see Makefile.functions
