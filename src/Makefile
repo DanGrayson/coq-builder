@@ -48,7 +48,7 @@ PACKAGES = with \
 	   intltool gtksourceview2 lablgtk lablgtkold coq84hoq hott \
 	   ProofGeneral \
 	   camlp5 coq83patched \
-	   checker \
+	   menhir checker \
 	   coqtrunk \
 	   alex agda
 $(foreach i, $(PACKAGES), $(eval include $i/Makefile.include))

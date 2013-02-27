@@ -6,7 +6,7 @@ checker_status          = $(call build-command,checker,git status)
 checker_diff            = $(call build-command,checker,git diff)
 checker_build           = $(call make,checker,build)
 checker_install         = $(call make,checker,prefix=$(call install_dir,checker) install)
-$(call depends,checker,$(OCAMLSWITCH))
+$(call depends,checker,$(OCAMLSWITCH) menhir)
 $(eval $(call package,checker))
 # Local Variables:
 # compile-command: "make -C .. linkup-checker"

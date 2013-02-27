@@ -1,0 +1,17 @@
+menhir_version         = 20130116
+menhir_url	       = http://gallium.inria.fr/~fpottier/menhir
+menhir_dir            := menhir-$(menhir_version)
+menhir_fetch           = $(call wget,menhir,$(menhir_url)/menhir-$(menhir_version).tar.gz)
+menhir_extract         = $(call untar-j,menhir,menhir-$(menhir_version).tar.gz)
+menhir_build           = $(call make,menhir,all PREFIX=$(call install_dir,menhir))
+menhir_install         = $(call make,menhir,install PREFIX=$(call install_dir,menhir))
+
+$(call depends,menhir,$(OCAMLSWITCH))
+$(eval $(call package,menhir))
+
+# Local Variables:
+# compile-command: "make -C .. linkup-menhir"
+# End:
+
+
+
