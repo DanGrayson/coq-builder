@@ -7,6 +7,7 @@ ProofGeneral_build           = $(call make,ProofGeneral,$(ProofGeneral_prefixes)
 ProofGeneral_install         = $(call make,ProofGeneral,-o compile install $(ProofGeneral_prefixes))
 ProofGeneral_status          = $(call build-command,ProofGeneral,git status)
 ProofGeneral_diff            = $(call build-command,ProofGeneral,git diff)
+ProofGeneral_update          = $(call git-update,ProofGeneral)
 
 $(eval $(call package,ProofGeneral))
 

@@ -95,6 +95,8 @@ $(call files_dir,$1)/.made-linkup: $(call files_dir,$1)/.made-install | $(call f
 	rm -f $$@.epkg-log
 	touch $$@
 relinkup-$1: unlinkup-$1 $(call files_dir,$1)/.made-linkup
+update-all: update-$1
+update-$1:; $(value $1_update)
 unlinkup-all: unlinkup-$1
 unlinkup-$1: | $(call files_dir,epkg)/.made-build
 	$(epkg) -r $1-$(value $1_version) || true

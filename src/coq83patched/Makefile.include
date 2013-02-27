@@ -27,7 +27,7 @@ coq83patched_configure         = $(call build-command,coq83patched, \
 					)
 coq83patched_build             = $(call make,coq83patched,world)
 coq83patched_install           = $(call make,coq83patched,install)
-update-coq83patched:;		 $(call build-command,coq83patched, git pull)
+coq83patched_update	       = $(call git-update,coq83patched)
 $(eval $(call package,coq83patched))
 $(call requires,coq83patched,$(OCAMLSWITCH) camlp5 hevea)
 $(call requires_install,coq83patched,lablgtkold)

@@ -22,6 +22,7 @@ OS := $(shell uname -o)
 all: ../README.user
 all: $(patsubst %,linkup-%,$(APPS))
 all: $(patsubst %,install-%,$(OTHER_APPS))
+status: status-self
 
 # Here is a serial number used to specify distinct repositories for our compiled software,
 # so we always have a previous version to go back to, if necessary.  Increment it manually at will.
@@ -57,5 +58,7 @@ $(foreach i, $(PACKAGES), $(eval include $i/Makefile.include))
 unlinkup-all: remove-dangling-links
 remove-dangling-links: $(call files_dir,epkg)/.made-build
 	set -x ; $(epkg) -c -X src -X encap $(patsubst ../%,-X %,$(wildcard ../encap-*)) || true
+status-self:
+	@ echo ================ coq-builder status ================= ; git status
 clean: clean-README.user
 clean-README.user:; rm -f ../README.user
