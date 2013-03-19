@@ -10,7 +10,8 @@ ProofGeneral_diff            = $(call build-command,ProofGeneral,git diff)
 ProofGeneral_update          = $(call git-update,ProofGeneral)
 
 $(eval $(call package,ProofGeneral))
+ProofGeneral: update-ProofGeneral rebuild-ProofGeneral linkup-ProofGeneral
 
 # Local Variables:
-# compile-command: "make -C .. linkup-ProofGeneral"
+# compile-command: "make -C .. ProofGeneral"
 # End:

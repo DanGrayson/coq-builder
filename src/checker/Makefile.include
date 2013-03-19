@@ -10,5 +10,5 @@ checker_update          = $(call git-update,checker)
 $(call depends,checker,$(OCAMLSWITCH) menhir)
 $(eval $(call package,checker))
 # Local Variables:
-# compile-command: "make -C .. linkup-checker"
+# compile-command: "make -C .. update-checker rebuild-checker linkup-checker"
 # End:

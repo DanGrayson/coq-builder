@@ -1,4 +1,5 @@
 all:
+always:
 
 ifeq "$(FORCE_LINKS)" "yes"
 EPKG_OPTIONS = -f -v -v -X mkencap_environment
