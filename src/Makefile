@@ -49,7 +49,7 @@ PACKAGES = with \
 	   intltool gtksourceview2 lablgtk lablgtkold autoconf coq84hoq hott \
 	   ProofGeneral \
 	   camlp5 coq83patched \
-	   menhir checker \
+	   findlib menhir checker \
 	   coqtrunk \
 	   alex agda
 $(foreach i, $(PACKAGES), $(eval include $i/Makefile.include))

@@ -8,7 +8,7 @@ coq84hoq_configure         = cd $(call build_dir,coq84hoq) && ./configure -with-
 coq84hoq_build             = $(call make,coq84hoq,KEEP_ML4_PREPROCESSED=true VERBOSE=true READABLE_ML4=yes world)
 coq84hoq_update            = $(call git-update,coq84hoq)
 coq84hoq_install           = $(call make,coq84hoq,install)
-$(call depends,coq84hoq,hevea lablgtk camlp5 $(OCAMLSWITCH))
+$(call depends,coq84hoq,autoconf hevea lablgtk camlp5 $(OCAMLSWITCH))
 $(eval $(call package,coq84hoq))
 
 # Local Variables:

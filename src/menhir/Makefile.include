@@ -1,13 +1,13 @@
-menhir_version         = 20130116
+menhir_version         = 20130911
 menhir_url	       = http://gallium.inria.fr/~fpottier/menhir
 menhir_dir            := menhir-$(menhir_version)
 menhir_fetch           = $(call wget,menhir,$(menhir_url)/menhir-$(menhir_version).tar.gz)
-menhir_extract         = $(call untar-j,menhir,menhir-$(menhir_version).tar.gz)
+menhir_extract         = $(call untar-z,menhir,menhir-$(menhir_version).tar.gz)
 menhir_parms	       = USE_OCAMLFIND="false " PREFIX=$(call install_dir,menhir)
 menhir_build           = $(call make,menhir,all $(menhir_parms))
 menhir_install         = $(call make,menhir,install $(menhir_parms))
 
-$(call depends,menhir,$(OCAMLSWITCH))
+$(call depends,menhir,$(OCAMLSWITCH) findlib)
 $(eval $(call package,menhir))
 
 # Local Variables:
