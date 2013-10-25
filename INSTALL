@@ -5,6 +5,43 @@ this directory tree in the final location:
 
       make
 
+Here's what happens after you type "make".
+
+   - a file ./README.user is created that explains how to use the resulting
+     programs.  In particular, it explains the shell script "with".
+
+   - the compiled programs and associated files are installed in ./encap-2/.
+     In certain situations it may be desirable to increment the 2 to 3 so as
+     to keep a backup of compiled files on disk.
+
+   - for some packages, links to the compiled files and associated files are
+     created in ./bin, ./lib, ./man, ./share, etc.  The purpose of the shell
+     script "with" is to set up your environment so the programs can be 
+     run correctly.  For example, ./bin is added to your path in fully
+     prefixed form.
+
+   - for some packages, links are not created.  The shell script "with"
+     can be used to make those available, too.  The appropriate "with"
+     command for your favorite purposes can be added to your .profile.
+
+To bypass the making of the default packages and build just the one you want,
+do this:
+
+     make -C src/XXX
+
+where XXX is the source directory of the package.  Example:
+
+     make -C src/coq83patched
+
+To also get the links created, do this:
+
+     make -C src/coq83patched linkup-coq83patched
+
+, but beware the possibility of conflicting links from other versions.  If you
+want to remove the others, do something like this:
+
+     make -C src/coq83patched unlinkup-coq84hoq
+
 -----------------------------------------------------------------------------
 
 Hints about specific systems:
