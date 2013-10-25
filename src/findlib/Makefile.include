@@ -1,0 +1,12 @@
+findlib_version         = 1.4
+findlib_dir            := findlib-$(findlib_version)
+findlib_tarfile        := findlib-$(findlib_version).tar.gz
+findlib_fetch           = $(call wget,findlib,http://download.camlcity.org/download/$(findlib_tarfile))
+findlib_extract         = $(call untar-z,findlib,$(findlib_tarfile))
+findlib_configure       = $(call build-command,findlib,./configure)
+findlib_build           = $(call make,findlib)
+findlib_install         = $(call make,findlib,install)
+$(eval $(call package,findlib))
+# Local Variables:
+# compile-command: "make -C .. install-findlib"
+# End:
