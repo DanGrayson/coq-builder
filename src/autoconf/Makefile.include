@@ -1,0 +1,9 @@
+autoconf_version         = 2.69
+autoconf_dir            := autoconf-$(autoconf_version)
+autoconf_tarfile        := autoconf-$(autoconf_version).tar.gz
+autoconf_fetch           = $(call wget,autoconf,http://ftp.gnu.org/gnu/autoconf/$(autoconf_tarfile))
+autoconf_extract         = $(call untar-z,autoconf,$(autoconf_tarfile))
+autoconf_configure       = $(call configure,autoconf)
+autoconf_build           = $(call make,autoconf)
+autoconf_install         = $(call make,autoconf,install)
+$(eval $(call package,autoconf))
