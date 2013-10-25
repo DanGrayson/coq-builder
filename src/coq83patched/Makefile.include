@@ -34,6 +34,3 @@ $(call requires_install,coq83patched,lablgtkold)
 # Local Variables:
 # compile-command: "make -C .. update-coq83patched install-coq83patched"
 # End:
-
-
-
