@@ -1,5 +1,5 @@
 # These are the apps we want to make visible to users:
-APPS = coq84hoq hott ProofGeneral checker with
+APPS = autoconf coq84hoq hott ProofGeneral checker with
 # These are the apps to build but make invisible by default, optionally visible using the "with" script:
 #OTHER_APPS = coqtrunk
 
@@ -46,7 +46,7 @@ OCAMLSWITCH = ocaml3
 PACKAGES = with \
 	   ocaml ocaml3 \
 	   hevea \
-	   intltool gtksourceview2 lablgtk lablgtkold coq84hoq hott \
+	   intltool gtksourceview2 lablgtk lablgtkold autoconf coq84hoq hott \
 	   ProofGeneral \
 	   camlp5 coq83patched \
 	   menhir checker \

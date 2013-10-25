@@ -6,7 +6,10 @@ hott_dir              := HoTT
 hott_extract           = $(call files-command,hott,git clone https://github.com/HoTT/HoTT.git $(hott_dir))
 hott_status            = $(call build-command,hott,git status)
 hott_diff              = $(call build-command,hott,git diff)
-hott_configure         = cd $(call build_dir,hott) && ./configure --prefix $(call install_dir,hott) && $(MAKE) clean
+hott_configure         =    cd $(call build_dir,hott) \
+			 && if [ ! -f configure ] ; then ./autogen.sh ; fi \
+			 && ./configure --prefix $(call install_dir,hott) \
+			 && $(MAKE) clean
 hott_build             = $(call make,hott,all)
 hott_install           = $(call make,hott,install)
 $(call depends,hott,coq84hoq)
