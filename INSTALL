@@ -27,20 +27,20 @@ Here's what happens after you type "make".
 To bypass the making of the default packages and build just the one you want,
 do this:
 
-     make -C src/XXX
+     make -C src install-XXX
 
 where XXX is the source directory of the package.  Example:
 
-     make -C src/coq83patched
+     make -C src install-coq83patched
 
 To also get the links created, do this:
 
-     make -C src/coq83patched linkup-coq83patched
+     make -C src linkup-XXX
 
 , but beware the possibility of conflicting links from other versions.  If you
-want to remove the others, do something like this:
+want to remove the links for a package YYY, do something like this:
 
-     make -C src/coq83patched unlinkup-coq84hoq
+     make -C src unlinkup-YYY
 
 -----------------------------------------------------------------------------
 
