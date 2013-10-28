@@ -10,5 +10,5 @@ $(call depends,coqtrunk,hevea lablgtk $(OCAMLSWITCH))
 $(eval $(call package,coqtrunk))
 
 # Local Variables:
-# compile-command: "make -C .. install-coqtrunk"
+# compile-command: "make -C .. install-coqtrunk VERBOSE=1"
 # End:

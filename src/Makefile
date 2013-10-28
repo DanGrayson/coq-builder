@@ -33,7 +33,7 @@ encap_dir = $(topdir)/encap-$(ENCAP_SER_NO)
 
 include Makefile.functions
 
-# Use these targets to manage the symoblic links:
+# Use these targets to manage the symbolic links:
 linkup-all: all
 unlinkup-all:
 linkup-apps: $(patsubst %,linkup-%,$(APPS))
@@ -46,9 +46,8 @@ OCAMLSWITCH = ocaml3
 PACKAGES = with \
 	   ocaml ocaml3 \
 	   hevea \
-	   intltool gtksourceview2 lablgtk lablgtkold autoconf coq84hoq hott \
+	   intltool gtksourceview2 lablgtk lablgtkold autoconf camlp5 coq83patched coq84hoq hott \
 	   ProofGeneral \
-	   camlp5 coq83patched \
 	   findlib menhir checker \
 	   coqtrunk \
 	   alex agda

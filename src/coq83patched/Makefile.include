@@ -2,9 +2,8 @@
 # run this makefile.  Then restore the state for the other programs by undoing those steps.  The problem seems
 # to be that the -lablgtkdir option below doesn't convince ocamlc to look there first.
 
-# will not build with ocaml 4 or camlp5 6.06
-# we build with an old version of lablgtk that doesn't have the latest modifier keys
-# we fix up the file config/coq_config.ml because the configure script does a bad job escaping quotation marks
+# It will not build with ocaml 4 or camlp5 6.06.
+# We build with an old version of lablgtk that doesn't have the latest modifier keys.
 coq83patched_basename          = coq
 coq83patched_version           = latest
 coq83patched_dir              := coq-8.3
@@ -13,18 +12,10 @@ coq83patched_extract           = $(call build-command,coq83patched, git checkout
 coq83patched_status            = $(call build-command,coq83patched,git status)
 coq83patched_diff              = $(call build-command,coq83patched,git diff)
 coq83patched_configure         = $(call build-command,coq83patched, \
-					./configure \
-					-prefix $(call install_dir,coq83patched) \
-					-lablgtkdir $(topdir)/encap-$(ENCAP_SER_NO)/lablgtkold-$(lablgtkold_version)/lib/ocaml/lablgtk2 \
-					&& \
-					sed 's/\(let coqideincl = "-I \)"\(.*\)""/\1\\"\2\\""/' <config/coq_config.ml >config/coq_config.ml.tmp \
-					&& \
-					chmod +w config/coq_config.ml \
-					&& \
-					mv config/coq_config.ml.tmp config/coq_config.ml \
-					&& \
-					chmod +w config/coq_config.ml \
-					)
+	./configure \
+		-prefix $(call install_dir,coq83patched) \
+		-lablgtkdir $(topdir)/encap-$(ENCAP_SER_NO)/lablgtkold-$(lablgtkold_version)/lib/ocaml/lablgtk2 \
+		)
 coq83patched_build             = $(call make,coq83patched,world)
 coq83patched_install           = $(call make,coq83patched,install)
 coq83patched_update	       = $(call git-update,coq83patched)
@@ -32,5 +23,5 @@ $(eval $(call package,coq83patched))
 $(call requires,coq83patched,$(OCAMLSWITCH) camlp5 hevea)
 $(call requires_install,coq83patched,lablgtkold)
 # Local Variables:
-# compile-command: "make -C .. update-coq83patched install-coq83patched"
+# compile-command: "make -C .. update-coq83patched install-coq83patched VERBOSE=1"
 # End:

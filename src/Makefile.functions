@@ -118,5 +118,4 @@ diff-$1:
 		$(value $1_diff)) ;\
 	  fi
 endef
-
 include epkg/Makefile.include

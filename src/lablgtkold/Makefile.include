@@ -2,6 +2,13 @@
 # (such as HYPER) have not been added, so the coqide code will compile in an
 # old version of coq (8.3)
 
+# We don't linkup by default, because newer coq needs a newer lablgtk.
+# In fact, we disable it.
+linkup-lablgtkold: linkup-lablgtkold-disabled
+linkup-lablgtkold-disabled:
+	@echo "target \"linkup-lablgtkold\" disabled"
+	false
+
 # Hint on Mac OS X with homebrew: cairo, gtk+, and libxml2 are installed in the
 # Cellar, so you may have to add Cellar/{cairo,gtk+,libxml2}/*/lib/pkgconfig to
 # PKG_CONFIG_PATH.
@@ -12,7 +19,7 @@ lablgtkold_fetch           = $(call files-command,lablgtkold, git clone --no-che
 lablgtkold_extract         = $(call build-command,lablgtkold, git checkout d16e74d5981c3ab9be68a862f49469178ede2ed4)
 lablgtkold_configure       = $(call configure,lablgtkold,--with-libdir=$(call install_dir,lablgtkold)/lib/ocaml --with-gtksourceview2)
 lablgtkold_build           = $(call make,lablgtkold,all byte opt world)
-lablgtkold_install         = $(call make,lablgtkold,install)
+lablgtkold_install         = $(call make,lablgtkold,install) && mkdir -pv $(topdir)/lib/ocaml/lablgtk2
 $(call depends,lablgtkold,$(OCAMLSWITCH) )
 $(eval $(call package,lablgtkold))
 

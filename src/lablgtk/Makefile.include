@@ -1,18 +1,14 @@
-
-# We purposely get an old version (not 2.16) where all the latest X11 modifiers
-# (such as HYPER) have not been added, so the coqide code will compile in this
-# old version of coq
-
-# But that no longer works, as they've added the modifiers.  I guess we need two
-# versions of lablgtk, both just installed, not linked up.  The old one would be from
-# commit d16e74d5981c3ab9be68a862f49469178ede2ed4, and the new one could be
-# the latest release.
+# We don't linkup by default, because old coq needs an old lablgtk.
+# In fact, we disable it.
+linkup-lablgtk: linkup-lablgtk-disabled
+linkup-lablgtk-disabled:
+	@echo "target \"linkup-lablgtk\" disabled"
+	false
 
 # Hint on Mac OS X with homebrew: cairo, gtk+, and libxml2 are installed in the
 # Cellar, so you may have to add Cellar/{cairo,gtk+,libxml2}/*/lib/pkgconfig to
 # PKG_CONFIG_PATH.
 
-# lablgtk_version         = 2.14.2
 lablgtk_version         = 2.16.0
 
 lablgtk_dir             = lablgtk
@@ -20,7 +16,13 @@ lablgtk_fetch           = $(call files-command,lablgtk, git clone --no-checkout 
 lablgtk_extract         = $(call build-command,lablgtk, git checkout master)
 lablgtk_configure       = $(call configure,lablgtk,--with-libdir=$(call install_dir,lablgtk)/lib/ocaml --with-gtksourceview2)
 lablgtk_build           = $(call make,lablgtk,all byte opt world)
-lablgtk_install         = $(call make,lablgtk,old-install)
+lablgtk_install         = $(call make,lablgtk,old-install) \
+		&& (set -x ; mkdir -p $(topdir)/lib/ocaml/lablgtk2) \
+		&& for i in $(call install_dir,lablgtk)/lib/ocaml/stublibs/*.so ;\
+		   do if [ -f "$$i" ] ;\
+		      then (set -x ; ln -s "$$i" $(call install_dir,lablgtk)/lib/ocaml/lablgtk2/. ) || exit 1 ;\
+		      fi ;\
+		   done
 ifeq "$(OS)" "Darwin"
 # not needed under PUIAS Linux
 $(call depends,lablgtk,gtksourceview2)
@@ -29,5 +31,5 @@ $(call requires,lablgtk,$(OCAMLSWITCH) )
 $(eval $(call package,lablgtk))
 
 # Local Variables:
-# compile-command: "make -C .. linkup-lablgtk"
+# compile-command: "make -C .. install-lablgtk"
 # End:
