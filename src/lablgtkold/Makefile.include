@@ -19,7 +19,13 @@ lablgtkold_fetch           = $(call files-command,lablgtkold, git clone --no-che
 lablgtkold_extract         = $(call build-command,lablgtkold, git checkout d16e74d5981c3ab9be68a862f49469178ede2ed4)
 lablgtkold_configure       = $(call configure,lablgtkold,--with-libdir=$(call install_dir,lablgtkold)/lib/ocaml --with-gtksourceview2)
 lablgtkold_build           = $(call make,lablgtkold,all byte opt world)
-lablgtkold_install         = $(call make,lablgtkold,install) && mkdir -pv $(topdir)/lib/ocaml/lablgtk2
+lablgtkold_install         = $(call make,lablgtkold,install) \
+		&& (set -x ; mkdir -p $(topdir)/lib/ocaml/lablgtk2) \
+		&& for i in $(call install_dir,lablgtkold)/lib/ocaml/stublibs/*.so ;\
+		   do if [ -f "$$i" ] ;\
+		      then (set -x ; ln -s "$$i" $(call install_dir,lablgtkold)/lib/ocaml/lablgtk2/. ) || exit 1 ;\
+		      fi ;\
+		   done
 $(call depends,lablgtkold,$(OCAMLSWITCH) )
 $(eval $(call package,lablgtkold))
 

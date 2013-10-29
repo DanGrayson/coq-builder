@@ -14,6 +14,7 @@ coq83patched_diff              = $(call build-command,coq83patched,git diff)
 coq83patched_configure         = $(call build-command,coq83patched, \
 	./configure \
 		-prefix $(call install_dir,coq83patched) \
+		-with-doc no \
 		-lablgtkdir $(topdir)/encap-$(ENCAP_SER_NO)/lablgtkold-$(lablgtkold_version)/lib/ocaml/lablgtk2 \
 		)
 coq83patched_build             = $(call make,coq83patched,world)

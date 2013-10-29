@@ -9,7 +9,8 @@ then exec 1>&2
      echo "   $cmd + command               (run command in the environment provided by $TOP)"
      echo "   . $cmd +                     (modify the environment of the current bash shell)"
      echo "   $cmd package command         (run command in the environment provided by package)"
-     echo "   $cmd \"package ...\" command   (run command in the environment provided by packages)"
+     echo "   $cmd \"package ...\" command   (run command in the environment provided by package ...)"
+     echo "   $cmd \"+ package ...\" command (run command in the environment provided by $TOP and package ...)"
      echo " packages available:"
      for i in $TOP/encap-@ENCAP_SER_NO@/*-*
      do if [ -d "$i" ]

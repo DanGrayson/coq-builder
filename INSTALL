@@ -5,6 +5,9 @@ this directory tree in the final location:
 
       make
 
+It is best if the path to the directory containing this file contains no
+spaces.
+
 Here's what happens after you type "make".
 
    - a file ./README.user is created that explains how to use the resulting
