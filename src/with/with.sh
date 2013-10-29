@@ -8,12 +8,14 @@ then exec 1>&2
      echo "usage:"
      echo "   $cmd + command               run command in the environment provided by $TOP"
      echo "   . $cmd +                     modify the environment of the current bash shell"
-     echo "   $cmd package command         run command in the environment provided by package"
-     echo "   $cmd \"package ...\" command   run command in the environment provided by package ..."
-     echo "   $cmd \"+ package ...\" command run command in the environment provided by $TOP and package ..."
+     echo "   $cmd PACKAGE command         run command in the environment provided by PACKAGE"
+     echo "   $cmd \"PACKAGE ...\" command   run command in the environment provided by PACKAGE ..."
+     echo "   $cmd \"+ PACKAGE ...\" command run command in the environment provided by $TOP and PACKAGE ..."
+     echo " PACKAGE may be specified with or with the version"
+     echo "         e.g.: coq83patched or coq83patched-latest"
      echo " packages provided:"
      echo "  $WITH"
-     echo " packages available:"
+     echo " packages available, with version:"
      for i in $TOP/encap-@ENCAP_SER_NO@/*-*
      do if [ -d "$i" ]
 	then echo "   $(basename $i)"
