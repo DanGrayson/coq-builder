@@ -12,7 +12,7 @@ coq83patched_extract           = $(call build-command,coq83patched, git checkout
 coq83patched_status            = $(call build-command,coq83patched,git status)
 coq83patched_diff              = $(call build-command,coq83patched,git diff)
 coq83patched_configure         = $(call build-command,coq83patched, \
-	./configure \
+	./configure -opt -with-doc no \
 		-prefix $(call install_dir,coq83patched) \
 		-with-doc no \
 		-lablgtkdir $(topdir)/encap-$(ENCAP_SER_NO)/lablgtkold-$(lablgtkold_version)/lib/ocaml/lablgtk2 \
