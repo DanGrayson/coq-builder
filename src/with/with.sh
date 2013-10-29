@@ -6,15 +6,17 @@ if [ $# = 0 ]
 then exec 1>&2
      cmd=with
      echo "usage:"
-     echo "   $cmd + command               (run command in the environment provided by $TOP)"
-     echo "   . $cmd +                     (modify the environment of the current bash shell)"
-     echo "   $cmd package command         (run command in the environment provided by package)"
-     echo "   $cmd \"package ...\" command   (run command in the environment provided by package ...)"
-     echo "   $cmd \"+ package ...\" command (run command in the environment provided by $TOP and package ...)"
+     echo "   $cmd + command               run command in the environment provided by $TOP"
+     echo "   . $cmd +                     modify the environment of the current bash shell"
+     echo "   $cmd package command         run command in the environment provided by package"
+     echo "   $cmd \"package ...\" command   run command in the environment provided by package ..."
+     echo "   $cmd \"+ package ...\" command run command in the environment provided by $TOP and package ..."
+     echo " packages provided:"
+     echo "  $WITH"
      echo " packages available:"
      for i in $TOP/encap-@ENCAP_SER_NO@/*-*
      do if [ -d "$i" ]
-	then echo "    $(basename $i)"
+	then echo "   $(basename $i)"
 	fi
      done
      return 0 2>/dev/null; exit 0
@@ -24,21 +26,23 @@ for j in $1
 do if [ "$j" = + ]
    then i=$TOP
    else i="$TOP/encap-@ENCAP_SER_NO@/$j"
-   fi
-   if ! [ -d "$i" ]
-   then found=false
-	for k in "$i"-* 
-        do if [ -d "$k" ]
-	   then if $found ; then echo "package $k has multiple versions, please specify one" >&2 ; return 1 2>/dev/null ; exit 1 ; fi
-		found=true
-		i=$k
-	   fi
-        done
-	if ! $found
-	then echo "package $j not found in directory $i" >&2
-             return 1 2>/dev/null; exit 1
+	if [ -d "$i" ]
+	then :
+	else found=false
+	     for k in "$i"-* 
+	     do if [ -d "$k" ]
+		then if $found ; then echo "package $k has multiple versions, please specify one" >&2 ; return 1 2>/dev/null ; exit 1 ; fi
+		     found=true
+		     i=$k
+		fi
+	     done
+	     if ! $found
+	     then echo "package $j not found in directory $i" >&2
+		  return 1 2>/dev/null; exit 1
+	     fi
 	fi
    fi
+   export WITH="$WITH $j"
    [ -d "$i"/bin ] && PATH="$i"/bin:$PATH
    [ -d "$i"/man ] && MANPATH="$i"/man:$MANPATH
    [ -d "$i"/share/man ] && MANPATH="$i"/share/man:$MANPATH
