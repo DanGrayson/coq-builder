@@ -17,8 +17,7 @@ then exec 1>&2
 	then echo "    $(basename $i)"
 	fi
      done
-     return 2>/dev/null
-     exit 0
+     return 0 2>/dev/null; exit 0
 fi
 
 for j in $1
@@ -27,9 +26,18 @@ do if [ "$j" = + ]
    else i="$TOP/encap-@ENCAP_SER_NO@/$j"
    fi
    if ! [ -d "$i" ]
-   then echo "expected a directory: $i" >&2
-        return 1 2>/dev/null
-        exit 1
+   then found=false
+	for k in "$i"-* 
+        do if [ -d "$k" ]
+	   then if $found ; then echo "package $k has multiple versions, please specify one" >&2 ; return 1 2>/dev/null ; exit 1 ; fi
+		found=true
+		i=$k
+	   fi
+        done
+	if ! $found
+	then echo "package $j not found in directory $i" >&2
+             return 1 2>/dev/null; exit 1
+	fi
    fi
    [ -d "$i"/bin ] && PATH="$i"/bin:$PATH
    [ -d "$i"/man ] && MANPATH="$i"/man:$MANPATH
