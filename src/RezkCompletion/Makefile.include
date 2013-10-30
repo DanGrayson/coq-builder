@@ -1,0 +1,16 @@
+RezkCompletion_version         = 0
+RezkCompletion_dir            := RezkCompletion
+RezkCompletion_fetch           = $(call files-command,RezkCompletion,git clone --no-checkout $(GITHUB_DANGRAYSON)/rezk_completion.git $(RezkCompletion_dir))
+RezkCompletion_extract         = $(call build-command,RezkCompletion,git checkout master)
+RezkCompletion_update          = $(call git-update,RezkCompletion)
+RezkCompletion_status          = $(call build-command,RezkCompletion,git status)
+RezkCompletion_diff            = $(call build-command,RezkCompletion,git diff)
+RezkCompletion_build           = $(call make,RezkCompletion,$(RezkCompletion_parms) all)
+# warning: this install step installs the files into the encap directory of coq83patched, in the user contrib area:
+RezkCompletion_install         = $(call make,RezkCompletion,$(RezkCompletion_parms) install)
+RezkCompletion_parms           = COQBIN=$(call install_dir,coq83patched)/bin/
+$(call depends_install_only,RezkCompletion,Foundations2 coq83patched)
+$(eval $(call package,RezkCompletion))
+# Local Variables:
+# compile-command: "make -C .. install-RezkCompletion"
+# End:

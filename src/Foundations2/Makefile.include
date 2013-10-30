@@ -9,6 +9,7 @@ Foundations2_build           = $(call make,Foundations2,$(Foundations2_parms) al
 # warning: this install step installs the files into the encap directory of coq83patched, in the user contrib area:
 Foundations2_install         = $(call make,Foundations2,$(Foundations2_parms) install)
 Foundations2_parms           = COQBIN=$(call install_dir,coq83patched)/bin/
+$(call depends_install_only,Foundations2,coq83patched)
 $(eval $(call package,Foundations2))
 # Local Variables:
 # compile-command: "make -C .. install-Foundations2"

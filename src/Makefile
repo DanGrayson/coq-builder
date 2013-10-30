@@ -43,7 +43,9 @@ OCAMLSWITCH = ocaml3
 PACKAGES = with \
 	   ocaml ocaml3 \
 	   hevea \
-	   intltool gtksourceview2 lablgtk lablgtkold autoconf camlp5 coq83patched Foundations2 coq84hoq hott \
+	   intltool gtksourceview2 lablgtk lablgtkold autoconf camlp5 \
+	   coq83patched Foundations2 RezkCompletion \
+	   coq84hoq hott \
 	   ProofGeneral \
 	   findlib menhir checker \
 	   coqtrunk \

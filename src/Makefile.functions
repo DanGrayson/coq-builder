@@ -47,6 +47,9 @@ endef
 define depends
 $(foreach x,$2,$(eval $(call files_dir,$1)/.made-configure:  $(call files_dir,$x)/.made-linkup))
 endef
+define depends_install_only
+$(foreach x,$2,$(eval $(call files_dir,$1)/.made-configure:  $(call files_dir,$x)/.made-install))
+endef
 
 epkg = $(call build_dir,epkg)/epkg/epkg
 
