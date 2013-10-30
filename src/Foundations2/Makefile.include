@@ -1,0 +1,15 @@
+Foundations2_version         = 0
+Foundations2_dir            := Foundations2
+Foundations2_fetch           = $(call files-command,Foundations2,git clone --no-checkout $(GITHUB_DANGRAYSON)/Foundations2.git $(Foundations2_dir))
+Foundations2_extract         = $(call build-command,Foundations2,git checkout vv-master)
+Foundations2_update	     = $(call git-update,Foundations2)
+Foundations2_status          = $(call build-command,Foundations2,git status)
+Foundations2_diff            = $(call build-command,Foundations2,git diff)
+Foundations2_build           = $(call make,Foundations2,$(Foundations2_parms) all)
+# warning: this install step installs the files into the encap directory of coq83patched, in the user contrib area:
+Foundations2_install         = $(call make,Foundations2,$(Foundations2_parms) install)
+Foundations2_parms           = COQBIN=$(call install_dir,coq83patched)/bin/
+$(eval $(call package,Foundations2))
+# Local Variables:
+# compile-command: "make -C .. install-Foundations2"
+# End:
