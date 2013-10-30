@@ -9,7 +9,7 @@ RezkCompletion_build           = $(call make,RezkCompletion,$(RezkCompletion_par
 # warning: this install step installs the files into the encap directory of coq83patched, in the user contrib area:
 RezkCompletion_install         = $(call make,RezkCompletion,$(RezkCompletion_parms) install)
 RezkCompletion_parms           = COQBIN=$(call install_dir,coq83patched)/bin/
-$(call depends_install_only,RezkCompletion,Foundations2 coq83patched)
+$(call requires_install_only,RezkCompletion,Foundations2 coq83patched)
 $(eval $(call package,RezkCompletion))
 # Local Variables:
 # compile-command: "make -C .. install-RezkCompletion"

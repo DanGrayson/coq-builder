@@ -7,22 +7,23 @@
 coq83patched_basename          = coq
 coq83patched_version           = latest
 coq83patched_dir              := coq-8.3
-coq83patched_fetch             = $(call files-command,coq83patched, git clone --no-checkout $(GITHUB_DANGRAYSON)/coq.git $(coq83patched_dir))
-coq83patched_extract           = $(call build-command,coq83patched, git checkout 8.3+recommended-patches)
+coq83patched_fetch             = $(call files-command,coq83patched,git clone --no-checkout $(GITHUB_DANGRAYSON)/coq.git $(coq83patched_dir))
+coq83patched_extract           = $(call build-command,coq83patched,git checkout 8.3+recommended-patches)
 coq83patched_status            = $(call build-command,coq83patched,git status)
 coq83patched_diff              = $(call build-command,coq83patched,git diff)
-coq83patched_configure         = $(call build-command,coq83patched, \
-	./configure -opt -with-doc no \
-		-prefix $(call install_dir,coq83patched) \
-		-with-doc no \
-		-lablgtkdir $(topdir)/encap-$(ENCAP_SER_NO)/lablgtkold-$(lablgtkold_version)/lib/ocaml/lablgtk2 \
-		)
-coq83patched_build             = $(call make,coq83patched,world)
-coq83patched_install           = $(call make,coq83patched,install)
+coq83patched_configure         = $(call build-command,coq83patched,./configure \
+	-opt \
+	-with-doc   no \
+	-prefix     $(call install_dir,coq83patched) \
+	-lablgtkdir $(call install_dir,lablgtkold)/lib/ocaml/lablgtk2)
+coq83patched_build             = $(call make,coq83patched,coqlight)
+coq83patched_dummy_dirs        = lib/coq/theories/Unicode lib/coq/theories/Classes lib/coq/theories/Program lib/coq/theories/MSets lib/coq/theories/FSets lib/coq/theories/Reals lib/coq/theories/Strings lib/coq/theories/Sorting lib/coq/theories/Setoids lib/coq/theories/Sets lib/coq/theories/Structures lib/coq/theories/Lists lib/coq/theories/Wellfounded lib/coq/theories/Relations lib/coq/theories/Numbers lib/coq/theories/QArith lib/coq/theories/NArith lib/coq/theories/ZArith lib/coq/theories/Bool
+coq83patched_install           = $(call make,coq83patched,install-coqlight) \
+			 	 && $(call build-command,coq83patched,(cd $(call install_dir,coq83patched) && mkdir -p $(coq83patched_dummy_dirs)))
 coq83patched_update	       = $(call git-update,coq83patched)
 $(eval $(call package,coq83patched))
 $(call requires,coq83patched,$(OCAMLSWITCH) camlp5 hevea)
-$(call requires_install,coq83patched,lablgtkold)
+$(call requires_install_only,coq83patched,lablgtkold)
 # Local Variables:
 # compile-command: "make -C .. update-coq83patched install-coq83patched VERBOSE=1"
 # End:

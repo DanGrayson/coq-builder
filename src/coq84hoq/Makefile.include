@@ -16,7 +16,7 @@ $(call depends,coq84hoq,hevea camlp5 $(OCAMLSWITCH))
 $(call requires,coq84hoq,autoconf)
 
 # refrain from linking up lablgtk so it doesn't mask lablgtkold:
-$(call requires_install,coq84hoq,lablgtk)
+$(call requires_install_only,coq84hoq,lablgtk)
 
 $(eval $(call package,coq84hoq))
 

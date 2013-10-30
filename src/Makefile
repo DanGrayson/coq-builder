@@ -60,3 +60,4 @@ status-self:
 	@ echo ================ coq-builder status ================= ; git status
 clean: clean-README.user
 clean-README.user:; rm -f ../README.user
+TAGS: ../Makefile Makefile Makefile.functions */Makefile.include; etags $^
