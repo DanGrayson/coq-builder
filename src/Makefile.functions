@@ -89,7 +89,9 @@ $(call files_dir,$1)/.made-install: $(call files_dir,$1)/.made-build | $(call fi
 	$(if $(value $1_basename),ln -s ../../../src/$(call build_dir,$1) $(call install_dir,$1)/packages/$(value $1_basename),:)
 	touch $$@
 install-$1: $(call files_dir,$1)/.made-install
-uninstall-$1:; rm -f $(call files_dir,$1)/.made-install
+uninstall-$1:
+	$(epkg) -r $1 || true
+	rm -f $(call files_dir,$1)/.made-install
 uninstall-all: uninstall-$1
 reinstall-$1: uninstall-$1 $(call files_dir,$1)/.made-install
 reinstall-all: reinstall-$1

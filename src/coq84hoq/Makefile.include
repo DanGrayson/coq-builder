@@ -4,22 +4,20 @@ coq84hoq_dir              := coq-$(coq84hoq_version)
 coq84hoq_extract           = $(call files-command,coq84hoq,git clone -b trunk git://github.com/HoTT/coq.git $(coq84hoq_dir))
 coq84hoq_status            = $(call build-command,coq84hoq,git status)
 coq84hoq_diff              = $(call build-command,coq84hoq,git diff)
-coq84hoq_configure         = $(call build-command,coq84hoq, \
-	./configure -with-doc no -opt -annotate -debug -usecamlp5 \
-		-prefix $(call install_dir,coq84hoq) \
-		-lablgtkdir $(topdir)/encap-$(ENCAP_SER_NO)/lablgtk-$(lablgtk_version)/lib/ocaml/lablgtk2 \
-	)
+coq84hoq_configure         = $(call build-command,coq84hoq,./configure \
+	-opt \
+	-with-doc no \
+	-annotate -debug -usecamlp5 \
+	-prefix $(call install_dir,coq84hoq) \
+	-lablgtkdir $(call install_dir,lablgtk)/lib/ocaml/lablgtk2)
 coq84hoq_build             = $(call make,coq84hoq,KEEP_ML4_PREPROCESSED=true VERBOSE=true READABLE_ML4=yes world)
 coq84hoq_update            = $(call git-update,coq84hoq)
 coq84hoq_install           = $(call make,coq84hoq,install)
 $(call depends,coq84hoq,hevea camlp5 $(OCAMLSWITCH))
 $(call requires,coq84hoq,autoconf)
-
 # refrain from linking up lablgtk so it doesn't mask lablgtkold:
 $(call requires_install_only,coq84hoq,lablgtk)
-
 $(eval $(call package,coq84hoq))
-
 # Local Variables:
 # compile-command: "make -C .. linkup-coq84hoq VERBOSE=1"
 # End:
