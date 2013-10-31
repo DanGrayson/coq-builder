@@ -6,21 +6,19 @@ if [ $# = 0 ]
 then exec 1>&2
      cmd=with
      echo "usage:"
-     echo "   $cmd + command               run command in the environment provided by $TOP"
-     echo "   . $cmd +                     modify the environment of the current bash shell"
-     echo "   $cmd PACKAGE command         run command in the environment provided by PACKAGE"
+     echo "   . $cmd \"PACKAGE ...\"         modify the environment of the current shell to provide PACKAGE ..."
      echo "   $cmd \"PACKAGE ...\" command   run command in the environment provided by PACKAGE ..."
-     echo "   $cmd \"+ PACKAGE ...\" command run command in the environment provided by $TOP and PACKAGE ..."
-     echo " PACKAGE may be specified with or with the version"
-     echo "         e.g.: coq83patched or coq83patched-latest"
-     echo " packages provided:"
-     echo "  $WITH"
+     echo " PACKAGE may be '+', which provides the following packages:"
+     (cd $TOP/packages && for i in * ; do [ -d "$i" ] && echo "   $i"; done)
      echo " packages available, with version:"
      for i in $TOP/encap-@ENCAP_SER_NO@/*-*
      do if [ -d "$i" ]
 	then echo "   $(basename $i)"
 	fi
      done
+     echo " PACKAGE may be specified with or with the version: e.g., 'coq83patched' or 'coq83patched-latest'"
+     echo " packages already provided in the current environment:"
+     echo "  $WITH"
      return 0 2>/dev/null; exit 0
 fi
 

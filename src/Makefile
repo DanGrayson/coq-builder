@@ -1,17 +1,14 @@
 # These are the apps we want to make visible to users:
 APPS = autoconf coq84hoq hott ProofGeneral checker with
 # These are the apps to build but make invisible by default, optionally visible using the "with" script:
-#OTHER_APPS = coqtrunk
-
-# we need to build an "old" version of lablgtk to get this working, so we disable it:
-# OTHER_APPS += coq83patched
+# OTHER_APPS += coqtrunk
+# OTHER_APPS += Foundations2
 
 # override this to "yes" to use ssh to access repositories at github.com/DanGrayson
-DEVEL_DAN = no
-ifeq "$(DEVEL_DAN)" "no"
-GITHUB_DANGRAYSON = https://github.com/DanGrayson
-else
+ifeq "$(DEVEL_DAN)" "yes"
 GITHUB_DANGRAYSON = git@github.com:DanGrayson
+else
+GITHUB_DANGRAYSON = https://github.com/DanGrayson
 endif
 
 OS := $(shell uname)
@@ -46,7 +43,9 @@ OCAMLSWITCH = ocaml3
 PACKAGES = with \
 	   ocaml ocaml3 \
 	   hevea \
-	   intltool gtksourceview2 lablgtk lablgtkold autoconf camlp5 coq83patched coq84hoq hott \
+	   intltool gtksourceview2 lablgtk lablgtkold autoconf camlp5 \
+	   coq83patched Foundations2 RezkCompletion \
+	   coq84hoq hott \
 	   ProofGeneral \
 	   findlib menhir checker \
 	   coqtrunk \
@@ -61,3 +60,4 @@ status-self:
 	@ echo ================ coq-builder status ================= ; git status
 clean: clean-README.user
 clean-README.user:; rm -f ../README.user
+TAGS: ../Makefile Makefile Makefile.functions */Makefile.include; etags $^
