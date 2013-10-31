@@ -1,8 +1,7 @@
 # These are the apps we want to make visible to users:
-APPS = autoconf coq84hoq hott ProofGeneral checker with
+APPS = autoconf hott ProofGeneral checker with Foundations2 RezkCompletion
 # These are the apps to build but make invisible by default, optionally visible using the "with" script:
-# OTHER_APPS += coqtrunk
-# OTHER_APPS += Foundations2
+OTHER_APPS += 
 
 # override this to "yes" to use ssh to access repositories at github.com/DanGrayson
 ifeq "$(DEVEL_DAN)" "yes"
