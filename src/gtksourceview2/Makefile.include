@@ -1,3 +1,11 @@
+# for Mac OS X 10.9 (Mavericks), more work is required:
+#  - install homebrew from http://brew.sh/
+#  - add /usr/local/Library/ENV/pkgconfig/10.9 to PKG_CONFIG_PATH, so libxml can be found.  For example, with
+#      export PKG_CONFIG_PATH=/usr/local/Library/ENV/pkgconfig/10.9:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig:/opt/X11/lib/pkgconfig:/usr/X11R6/lib/pkgconfig:
+#  - install some needed packages with:
+#     brew install atk; brew install cairo; brew install dirmngr; brew install fontconfig; brew install freetype; brew install gdk-pixbuf; brew install glib; brew install gnupg; brew install gnupg2; brew install gobject-introspection; brew install gtk+; brew install harfbuzz; brew install jpeg; brew install libassuan; brew install libgcrypt; brew install libksba; brew install libpng; brew install libtiff; brew install libusb; brew install libusb-compat; brew install pango; brew install pinentry; brew install pixman; brew install pkg-config; brew install pth; brew install xz; 
+#     (note: gio is provided by glib)
+
 gtksourceview2_version         = 2.10.5
 gtksourceview2_dir            := gtksourceview-$(gtksourceview2_version)
 gtksourceview2_tarfile         = gtksourceview-$(gtksourceview2_version).tar.gz
