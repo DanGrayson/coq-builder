@@ -6,6 +6,9 @@
 #     brew install atk; brew install cairo; brew install dirmngr; brew install fontconfig; brew install freetype; brew install gdk-pixbuf; brew install glib; brew install gnupg; brew install gnupg2; brew install gobject-introspection; brew install gtk+; brew install harfbuzz; brew install jpeg; brew install libassuan; brew install libgcrypt; brew install libksba; brew install libpng; brew install libtiff; brew install libusb; brew install libusb-compat; brew install pango; brew install pinentry; brew install pixman; brew install pkg-config; brew install pth; brew install xz; 
 #     (note: gio is provided by glib)
 
+# another possibility, for the long run:
+#   brew install gtksourceview
+
 gtksourceview2_version         = 2.10.5
 gtksourceview2_dir            := gtksourceview-$(gtksourceview2_version)
 gtksourceview2_tarfile         = gtksourceview-$(gtksourceview2_version).tar.gz
