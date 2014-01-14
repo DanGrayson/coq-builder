@@ -23,10 +23,8 @@ lablgtk_install         = $(call make,lablgtk,old-install) \
 		      then (set -x ; ln -s "$$i" $(call install_dir,lablgtk)/lib/ocaml/lablgtk2/. ) || exit 1 ;\
 		      fi ;\
 		   done
-ifeq "$(OS)" "Darwin"
-# not needed under PUIAS Linux
+# gtksourceview2 is not needed under PUIAS Linux, but is needed under SL6.4, where it exists but is too old
 $(call depends,lablgtk,gtksourceview2)
-endif
 $(call requires,lablgtk,$(OCAMLSWITCH) )
 $(eval $(call package,lablgtk))
 

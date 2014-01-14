@@ -1,7 +1,17 @@
 This is a system of makefiles to build coq and the programs it needs.
 
-Quick start for software builders, do once for the users, after putting
-this directory tree in the final location:
+To prepare to build, add some packages:
+
+   Under Debian 6.0 (date 2012/12):
+      sudo apt-get install -y autoconf autotools-dev automake libxml2-dev libgtksourceview2.0-dev
+
+   Under Scientific Linux 6.4:
+      sudo yum install gtk2-devel
+
+To build:
+
+Run the following command once for the users, after putting this directory tree
+in its final location:
 
       make
 
@@ -9,9 +19,6 @@ It is best if the path to the directory containing this file contains no
 spaces.
 
 Here's what happens after you type "make".
-
-   - a file ./README.user is created that explains how to use the resulting
-     programs.  In particular, it explains the shell script "with".
 
    - the compiled programs and associated files are installed in ./encap-2/.
      In certain situations it may be desirable to increment the 2 to 3 so as
@@ -23,9 +30,13 @@ Here's what happens after you type "make".
      run correctly.  For example, ./bin is added to your path in fully
      prefixed form.
 
+   - a file ./README.user is created that explains how to use the resulting
+     programs.  It explains the shell script "with", and it includes full paths
+     to the files and directories.
+
    - for some packages, links are not created.  The shell script "with"
      can be used to make those available, too.  The appropriate "with"
-     command for your favorite purposes can be added to your .profile.
+     command for your favorite purposes can be added to the user's .profile.
 
 To bypass the making of the default packages and build just the one you want,
 do this:
@@ -44,13 +55,6 @@ To also get the links created, do this:
 want to remove the links for a package YYY, do something like this:
 
      make -C src unlinkup-YYY
-
------------------------------------------------------------------------------
-
-Hints about specific systems:
-
-   Under Debian 6.0 (date 2012/12) install these optional packages:
-      autoconf autotools-dev automake libxml2-dev libgtksourceview2.0-dev
 
 -----------------------------------------------------------------------------
 

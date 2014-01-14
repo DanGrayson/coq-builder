@@ -1,8 +1,9 @@
 all:
 always:
 
+EPKG_OPTIONS += -X share/info/dir
 ifeq "$(FORCE_LINKS)" "yes"
-EPKG_OPTIONS = -f -v -v -X mkencap_environment
+EPKG_OPTIONS += -f -v -v -X mkencap_environment
 endif
 
 # we make topdir and topsrcdir absolute paths:
