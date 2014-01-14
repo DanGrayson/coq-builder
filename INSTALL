@@ -1,12 +1,22 @@
 This is a system of makefiles to build coq and the programs it needs.
 
+-----------------------------------------------------------------------------
+
 To prepare to build, add some packages:
 
    Under Debian 6.0 (date 2012/12):
+
       sudo apt-get install -y autoconf autotools-dev automake libxml2-dev libgtksourceview2.0-dev
 
    Under Scientific Linux 6.4:
+
       sudo yum install gtk2-devel
+      
+      Emacs 23.1.1 is too old for Proof General, since the function
+      "add-file-local-variable" doesn't exist yet, so install the latest emacs.
+      The sources are available at ftp://ftp.gnu.org/gnu/emacs. 
+
+-----------------------------------------------------------------------------
 
 To build:
 
