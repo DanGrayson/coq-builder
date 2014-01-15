@@ -23,6 +23,7 @@ git-checkout = cd $(call build_dir,$1) && git checkout $2
 git-update = cd $(call build_dir,$1) && git pull
 untar-z = cd $(call files_dir,$1) && tar xzf $2
 untar-j = cd $(call files_dir,$1) && tar xjf $2
+untar-J = cd $(call files_dir,$1) && tar xJf $2
 install_dir = $(topdir)/encap-$(ENCAP_SER_NO)/$1-$(value $1_version)
 files-command = cd $(call files_dir,$1) && $2
 build-command = cd $(call build_dir,$1) && $2

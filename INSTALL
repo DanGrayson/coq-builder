@@ -11,10 +11,6 @@ To prepare to build, add some packages:
    Under Scientific Linux 6.4:
 
       sudo yum install gtk2-devel
-      
-      Emacs 23.1.1 is too old for Proof General, since the function
-      "add-file-local-variable" doesn't exist yet, so install the latest emacs.
-      The sources are available at ftp://ftp.gnu.org/gnu/emacs. 
 
 -----------------------------------------------------------------------------
 
@@ -65,6 +61,20 @@ To also get the links created, do this:
 want to remove the links for a package YYY, do something like this:
 
      make -C src unlinkup-YYY
+
+-----------------------------------------------------------------------------
+
+To clean up:
+
+  After building, the following command will remove the source code previously
+  downloaded and the temporary files created while building:
+
+    make clean
+
+  The installed package files remain.  To clean up everything, use the
+  following command:
+
+    make distclean
 
 -----------------------------------------------------------------------------
 

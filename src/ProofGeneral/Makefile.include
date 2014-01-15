@@ -9,6 +9,7 @@ ProofGeneral_status          = $(call build-command,ProofGeneral,git status)
 ProofGeneral_diff            = $(call build-command,ProofGeneral,git diff)
 ProofGeneral_update          = $(call git-update,ProofGeneral)
 
+$(call requires,ProofGeneral,emacs)
 $(eval $(call package,ProofGeneral))
 ProofGeneral: update-ProofGeneral rebuild-ProofGeneral linkup-ProofGeneral
 

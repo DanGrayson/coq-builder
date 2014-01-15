@@ -1,0 +1,14 @@
+# Emacs 23.1.1 is too old for Proof General, since the function
+# "add-file-local-variable" doesn't exist yet, so we install the latest emacs.
+# Eventually we should install this only if the existing emacs is not modern
+# enough.
+
+emacs_version         = 24.3
+emacs_dir            := emacs-$(emacs_version)
+emacs_tarfile        := emacs-$(emacs_version).tar.xz
+emacs_fetch           = $(call wget,emacs,http://ftp.gnu.org/gnu/emacs/$(emacs_tarfile))
+emacs_extract         = $(call untar-J,emacs,$(emacs_tarfile))
+emacs_configure       = $(call configure,emacs,--with-xpm=no --with-jpeg=no --with-gif=no --with-tiff=no)
+emacs_build           = $(call make,emacs)
+emacs_install         = $(call make,emacs,install)
+$(eval $(call package,emacs))

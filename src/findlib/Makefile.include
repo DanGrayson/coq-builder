@@ -1,7 +1,12 @@
 findlib_version         = 1.4
+
+# camlcity.org was down all day Jan 14, 2014, so we switched:
+# findlib_url := http://download.camlcity.org/download/$(findlib_tarfile)
+findlib_url := http://pkgs.fedoraproject.org/lookaside/extras/ocaml-findlib/findlib-1.4.tar.gz/5d1f8238c53964fdd14387b87b48b5d9/findlib-1.4.tar.gz
+
 findlib_dir            := findlib-$(findlib_version)
 findlib_tarfile        := findlib-$(findlib_version).tar.gz
-findlib_fetch           = $(call wget,findlib,http://download.camlcity.org/download/$(findlib_tarfile))
+findlib_fetch           = $(call wget,findlib,$(findlib_url))
 findlib_extract         = $(call untar-z,findlib,$(findlib_tarfile))
 findlib_configure       = $(call build-command,findlib,./configure)
 findlib_build           = $(call make,findlib)

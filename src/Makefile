@@ -1,5 +1,5 @@
 # These are the apps we want to make visible to users:
-APPS = m4 autoconf hott ProofGeneral checker with Foundations2 RezkCompletion
+APPS = with m4 autoconf hott ProofGeneral checker Foundations2 RezkCompletion
 # These are the apps to build but make invisible by default, optionally visible using the "with" script:
 OTHER_APPS += 
 
@@ -45,7 +45,7 @@ PACKAGES = with \
 	   intltool gtksourceview2 lablgtk lablgtkold autoconf m4 camlp5 \
 	   coq83patched Foundations2 RezkCompletion \
 	   coq84hoq hott \
-	   ProofGeneral \
+	   emacs ProofGeneral \
 	   findlib menhir checker \
 	   coqtrunk \
 	   alex agda
