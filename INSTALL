@@ -12,6 +12,13 @@ To prepare to build, add some packages:
 
       sudo yum install -y git gtk2-devel
 
+   Under Mac OS X, 10.9.2:
+
+      Type "make" on a command line, and if the "Command Line Tools" are not installed
+      ("make" is one of them), then the system will offer to install them for you.
+      You don't have to also install "Xcode", which is a graphical user interface
+      to a development environment.
+
 -----------------------------------------------------------------------------
 
 To build:
