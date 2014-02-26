@@ -19,7 +19,7 @@ To prepare to build, add some packages:
       You don't have to also install "Xcode", which is a graphical user interface
       to a development environment.
 
-      Also, go to http://brew.sh to install "brew", and use the command
+      Also, go to http://brew.sh to install "brew", and use the commands
       	  brew install wget pkg-config libxml2 glib
 	  brew link glib
 	  brew install gtk+
