@@ -9,10 +9,12 @@
 # another possibility, for the long run:
 #   brew install gtksourceview
 
+# old URL was http://ftp.acc.umu.se/pub/gnome/sources/gtksourceview/2.10/
+
 gtksourceview2_version         = 2.10.5
 gtksourceview2_dir            := gtksourceview-$(gtksourceview2_version)
 gtksourceview2_tarfile         = gtksourceview-$(gtksourceview2_version).tar.gz
-gtksourceview2_fetch           = $(call fetchurl,gtksourceview2,http://ftp.acc.umu.se/pub/gnome/sources/gtksourceview/2.10/$(gtksourceview2_tarfile))
+gtksourceview2_fetch           = $(call fetchurl,gtksourceview2,http://gemmei.acc.umu.se/pub/gnome/sources/gtksourceview/2.10/$(gtksourceview2_tarfile))
 gtksourceview2_extract         = $(call untar-z,gtksourceview2,$(gtksourceview2_tarfile))
 gtksourceview2_configure       = $(call configure,gtksourceview2,--prefix=$(call install_dir,gtksourceview2))
 gtksourceview2_build           = $(call make,gtksourceview2,all)
