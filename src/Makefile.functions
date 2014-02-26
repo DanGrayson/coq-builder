@@ -15,7 +15,8 @@ build_dir = $(call files_dir,$1)/$(value $1_dir)
 #
 wget = cd $(call files_dir,$1) && rm -f $(shell basename $2) && wget $2
 curl = cd $(call files_dir,$1) && for i in $2 ; do rm -f `basename $$i` && curl $$i -o `basename $$i` ; done
-fetchurl = $(curl)
+fetchurl = $(wget)
+# curl doesn't seem to manage to download https, even though it claims to be able to
 svn-checkout = cd $(call files_dir,$1) && svn co --quiet $2 $3
 svn-update = cd $(call build_dir,$1) && svn co $2 $3
 svn-get-release = cd $(call build_dir,$1) && ( svn info | grep Revision | sed 's/.*: //' )
