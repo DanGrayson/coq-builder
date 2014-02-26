@@ -20,8 +20,8 @@ To prepare to build, add some packages:
       to a development environment.
 
       Also, go to http://brew.sh to install "brew", and use the command
-      	  brew install wget pkg-config
-      to install "wget" and "pkg-config".
+      	  brew install wget pkg-config glib gtk+ libxml2
+      to install various packages.
 
 -----------------------------------------------------------------------------
 
