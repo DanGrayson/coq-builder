@@ -7,7 +7,8 @@ coq84hoq_diff              = $(call build-command,coq84hoq,git diff)
 coq84hoq_configure         = $(call build-command,coq84hoq,./configure \
 	-opt \
 	-with-doc no \
-	-annotate -debug -usecamlp5 \
+	-annotate -debug \
+	-usecamlp5 \
 	-prefix $(call install_dir,coq84hoq) \
 	-lablgtkdir $(call install_dir,lablgtk)/lib/ocaml/lablgtk2)
 coq84hoq_build             = $(call make,coq84hoq,KEEP_ML4_PREPROCESSED=true VERBOSE=true READABLE_ML4=yes world)

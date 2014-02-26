@@ -2,7 +2,13 @@ coqtrunk_basename          = coq
 coqtrunk_version           = trunk
 coqtrunk_dir              := coq-$(coqtrunk_version)
 coqtrunk_extract           = $(call svn-checkout,coqtrunk,svn://scm.gforge.inria.fr/svn/coq/trunk,$(coqtrunk_dir))
-coqtrunk_configure         = $(call build-command,coqtrunk,./configure -opt -annotate -debug -prefix $(call install_dir,coqtrunk) -with-doc no)
+coqtrunk_configure         = $(call build-command,coqtrunk,./configure \
+	-opt \
+	-no-native-compiler \
+	-with-doc no \
+	-annotate -debug \
+	-prefix $(call install_dir,coqtrunk) \
+	)
 coqtrunk_build             = export LD_LIBRARY_PATH=$(topsrcdir)/$(call build_dir,coqtrunk)/kernel/byterun; \
 			     $(call make,coqtrunk,KEEP_ML4_PREPROCESSED=true VERBOSE=true READABLE_ML4=yes world)
 coqtrunk_install           = $(call make,coqtrunk,install)

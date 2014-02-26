@@ -1,6 +1,6 @@
 agda_version         = 2.3.0.1
 agda_dir            := Agda-$(agda_version)
-agda_fetch           = $(call wget,agda,http://code.haskell.org/Agda/Agda-$(agda_version).tar.gz)
+agda_fetch           = $(call fetchurl,agda,http://code.haskell.org/Agda/Agda-$(agda_version).tar.gz)
 agda_extract         = $(call untar-z,agda,Agda-$(agda_version).tar.gz)
 agda_configure       = cd $(call build_dir,agda) && ./configure -prefix $(topdir)
 agda_build           = $(call make,agda)

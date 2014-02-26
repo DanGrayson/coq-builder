@@ -2,7 +2,7 @@
 m4_version         = 1.4.17
 m4_dir            := m4-$(m4_version)
 m4_tarfile        := m4-$(m4_version).tar.bz2
-m4_fetch           = $(call wget,m4,http://ftp.gnu.org/gnu/m4/$(m4_tarfile))
+m4_fetch           = $(call fetchurl,m4,http://ftp.gnu.org/gnu/m4/$(m4_tarfile))
 m4_extract         = $(call untar-j,m4,$(m4_tarfile))
 m4_configure       = $(call configure,m4)
 m4_build           = $(call make,m4)
